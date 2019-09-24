@@ -44,9 +44,6 @@ db.movieDetails.count({"rated": "PG-13", "year":1993})
 **Exercise 4** :computer:
 
 In order to display the entire document, use the `find()` method.
-```suggestion
-Be cautious when using `find()` as it will return EVERY document that matches the parameters.  If you are using `find()` to explore data to see it's structure, condsider using `findOne()` instead.
-```
 
 **query:**
 ```javascript
