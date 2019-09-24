@@ -1,6 +1,6 @@
-# READ Operations
+## READ Operations
 
-### Counting records:
+### Counting records
 **Exercise 1** :computer:
 
 A simple `count()` operation in order to count the number of documents in the collection.
@@ -12,7 +12,7 @@ db.movieDetails.count()
 
 ---
 
-### Filtering on a single field:
+### Filtering on a single field
 
 **Exercise 2** :computer: 
 
@@ -24,11 +24,13 @@ db.movieDetails.count({"rated": "PG-13"})
 ```
 ---
 
-### Filtering on multiple fields:
+### Filtering on multiple fields
 
-Adding another selector using the `,` operator **ANDs** the filters and returns the matching results.
+**Exercise 3** :computer:
 
-**Exercise 3** :computer: 
+Adding another parameter using the `,` operator **ANDs** the filters and returns the matching results.
+
+ 
 
 **query:**
 
@@ -37,31 +39,34 @@ db.movieDetails.count({"rated": "PG-13", "year":1993})
 ```
 ---
 
-### Using the "find()" method:
-In order to display the entire document, use the `find()` method.
+### Using the "find()" method
 
-**Exercise 4** :computer: 
+**Exercise 4** :computer:
+
+In order to display the entire document, use the `find()` method.
 
 **query:**
 ```javascript
 db.movieDetails.find({"rated": "PG-13", "year":1993})
 ```
-**result:**
+
+**result:** (Only a part of the output has been shown.)
 ```javascript
 { "_id" : ObjectId("5d7e92671ddae9be2e725550"), "title" : "Son in Law", "year" : 1993, "rated" : "PG-13", "runtime" : 95, "countries" : [ "USA" ], "genres" : [ "Comedy", "Drama", "Romance" ], "director" : "Steve Rash", "writers" : [ "Patrick J. Clifton", "Susan McMartin", "Peter M. Lenkov", "Fax Bahr", "Adam Small", "Shawn Schepps" ], "actors" : [ "Pauly Shore", "Carla Gugino", "Lane Smith", "Cindy Pickett" ], "plot" : "Having gotten a taste of college life, a drastically changed farm girl returns home for Thanksgiving break with her best friend, a flamboyant party animal who is clearly a fish out of water in a small farm town.", "poster" : "http://ia.media-imdb.com/images/M/MV5BMTUxNDkyODMwN15BMl5BanBnXkFtZTYwODA3NjU5._V1_SX300.jpg", "imdb" : { "id" : "tt0108186", "rating" : 5.6, "votes" : 12557 }, "awards" : { "wins" : 0, "nominations" : 1, "text" : "1 nomination." }, "type" : "movie" }
 ```
 
-
-Chain the `pretty()` method to the `find()` method for a prettier print of the output.
+As you can see, the output contains the entire document in a single line. This makes it hard to discern the layout of the document. We'll cover easy document parsing in the next exercise.
 
 **Exercise 5** :computer: 
+
+Chain the `pretty()` method to the `find()` method for a prettier print of the output where each new field is written on a new line.
 
 **query:**
 ```javascript
 db.movieDetails.find({"rated": "PG-13", "year":1993}).pretty()
 ```
 
-**result:**
+**result:** (Only a part of the output has been shown.)
 ```javascript
 {
 	"_id" : ObjectId("5d7e92671ddae9be2e725550"),
@@ -109,10 +114,11 @@ db.movieDetails.find({"rated": "PG-13", "year":1993}).pretty()
 ```
 ---
 
-### Filtering embedded documents:
-Driving down the hierarchy in documents and filtering on nested levels can be done using the dot notation.
+### Filtering embedded documents
 
-**Exercise 6** :computer: 
+**Exercise 6** :computer:
+
+Driving down the hierarchy in documents can be done using the dot notation. In the query below, we access the `rating` field (which is nested inside the `imdb` field) using `imdb.rating` as the **key**.
 
 **query:**
 
@@ -121,16 +127,16 @@ db.movieDetails.find({"imdb.rating":9.5}).pretty()
 ```
 ---
 
-### Filtering array values:
+### Filtering array values
 
-When it comes to matching on array values, we can match:
+**Exercise 7** :computer:
+
+When it comes to matching on array values, we can match in 3 ways:
 * the entire array
 
-The following query matches documents with the array of `genres` containing **exactly** 'Documentary' followed by 'Family', in that order. Note that arrays that contain 'Documentary', 'Family' and any other genre like 'Drama' or 'Comedy' are not returned because it is **not** an exact match of the filter criteria. 
+The following query matches documents where the `genres` array contains **exactly** 'Documentary' followed by 'Family', in that order. Note that arrays that contain 'Documentary', 'Family' and any other genre like 'Drama' or 'Comedy' are not returned because it is **not** an exact match of the filter criteria. 
 
-**Exercise 7** :computer: 
-
-**query:**
+ **query:**
 
 ```javascript
 db.movieDetails.find({"genres":["Documentary", "Family"]}).pretty()
@@ -213,13 +219,13 @@ db.movieDetails.find({"genres":["Documentary", "Family"]}).pretty()
 **Exercise 8** :computer: 
 * any element in the array
 
-A more common search criteria is filtering out a single element in the array, irrespective of its array position. Note that 'Musical' is matched irrespective of its position in the array. 
+A more common search criteria is filtering out a single element in the array, irrespective of its array position. Note that 'Musical' is matched irrespective of its position in the `genres` array. 
 
 **query:**
 ```javascript
 db.movieDetails.find({"genres":"Musical"}).pretty()
 ```
-**result:**
+**result:** (Only a part of the output has been shown.)
 ```javascript
 {
 	"_id" : ObjectId("5d7e92671ddae9be2e72570a"),
@@ -348,163 +354,8 @@ Sometimes array positions matter as in the case of the `actors` array where name
 db.movieDetails.find({"actors.0":"Shah Rukh Khan"}).pretty()
 ```
 
-**result:**
+**result:** (Only a part of the output has been shown.)
 ```javascript
-{
-	"_id" : ObjectId("5d7e92671ddae9be2e7257e5"),
-	"title" : "One 2 Ka 4",
-	"year" : 2001,
-	"rated" : null,
-	"runtime" : 169,
-	"countries" : [
-		"India"
-	],
-	"genres" : [
-		"Action",
-		"Comedy",
-		"Drama"
-	],
-	"director" : "Shashilal K. Nair",
-	"writers" : [
-		"Sanjay Chhel",
-		"Raaj Kumar Dahima",
-		"Manoj Lalwani"
-	],
-	"actors" : [
-		"Shah Rukh Khan",
-		"Juhi Chawla",
-		"Jackie Shroff",
-		"Nirmal Pandey"
-	],
-	"plot" : "Javed Abbas (Jackie Shroff) is widowed Police Officer with four children. His partner is Arun Verma (Shahrukh Khan). Both Javed and Arun are honest, hard-working and diligent. And this ...",
-	"poster" : "http://ia.media-imdb.com/images/M/MV5BMTYzODgyMDkyMF5BMl5BanBnXkFtZTcwNjg4NzUyMQ@@._V1_SX300.jpg",
-	"imdb" : {
-		"id" : "tt0227194",
-		"rating" : 5.4,
-		"votes" : 3083
-	},
-	"awards" : {
-		"wins" : 0,
-		"nominations" : 0,
-		"text" : ""
-	},
-	"type" : "movie"
-}
-{
-	"_id" : ObjectId("5d7e92671ddae9be2e7258be"),
-	"title" : "Yeh Lamhe Judaai Ke",
-	"year" : 2004,
-	"rated" : null,
-	"runtime" : 135,
-	"countries" : [
-		"India"
-	],
-	"genres" : [
-		"Drama"
-	],
-	"director" : "Birendra Nath Tiwari",
-	"writers" : [ ],
-	"actors" : [
-		"Shah Rukh Khan",
-		"Raveena Tandon",
-		"Navneet Nishan",
-		"Avtar Gill"
-	],
-	"plot" : "Dushyant and Jaya are childhood friends. In spite of his family's poverty, Dushyant has one great ambition in life: to become a successful singer. Jaya encourages him all she can and helps ...",
-	"poster" : "http://ia.media-imdb.com/images/M/MV5BMjkxZDc3NjAtMWNjMC00YWI5LTkxNzgtOGQ3MzM2NTMyODk2XkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_SX300.jpg",
-	"imdb" : {
-		"id" : "tt0385351",
-		"rating" : 4.1,
-		"votes" : 1179
-	},
-	"awards" : {
-		"wins" : 0,
-		"nominations" : 0,
-		"text" : ""
-	},
-	"type" : "movie"
-}
-{
-	"_id" : ObjectId("5d7e92671ddae9be2e7258ec"),
-	"title" : "Rab Ne Bana Di Jodi",
-	"year" : 2008,
-	"rated" : null,
-	"runtime" : 167,
-	"countries" : [
-		"India"
-	],
-	"genres" : [
-		"Comedy",
-		"Drama",
-		"Musical"
-	],
-	"director" : "Aditya Chopra",
-	"writers" : [
-		"Aditya Chopra",
-		"Aditya Chopra",
-		"Aditya Chopra"
-	],
-	"actors" : [
-		"Shah Rukh Khan",
-		"Vinay Pathak",
-		"Anushka Sharma",
-		"M.K. Raina"
-	],
-	"plot" : "A middle-aged man who lost his love for life rediscovers it by assuming a new identity in order to rekindle the romantic spark in his marriage.",
-	"poster" : "http://ia.media-imdb.com/images/M/MV5BNTU5MjI3MTE0NV5BMl5BanBnXkFtZTcwMDk4OTUxMg@@._V1_SX300.jpg",
-	"imdb" : {
-		"id" : "tt1182937",
-		"rating" : 7.1,
-		"votes" : 26562
-	},
-	"awards" : {
-		"wins" : 3,
-		"nominations" : 11,
-		"text" : "3 wins & 11 nominations."
-	},
-	"type" : "movie"
-}
-{
-	"_id" : ObjectId("5d7e92671ddae9be2e725943"),
-	"title" : "Om Shanti Om",
-	"year" : 2007,
-	"rated" : "PG-13",
-	"runtime" : 162,
-	"countries" : [
-		"India"
-	],
-	"genres" : [
-		"Action",
-		"Comedy",
-		"Drama"
-	],
-	"director" : "Farah Khan",
-	"writers" : [
-		"Farah Khan",
-		"Mushtaq Sheikh",
-		"Farah Khan",
-		"Mayur Puri"
-	],
-	"actors" : [
-		"Shah Rukh Khan",
-		"Arjun Rampal",
-		"Kiron Kher",
-		"Shreyas Talpade"
-	],
-	"plot" : "In the 1970s, Om, an aspiring actor, is murdered, but is immediately reincarnated into the present day. He attempts to discover the mystery of his demise and find Shanti, the love of his previous life.",
-	"poster" : "http://ia.media-imdb.com/images/M/MV5BMTgwMTc5MzMxOF5BMl5BanBnXkFtZTcwOTA4MTU1MQ@@._V1_SX300.jpg",
-	"imdb" : {
-		"id" : "tt1024943",
-		"rating" : 6.6,
-		"votes" : 25825
-	},
-	"awards" : {
-		"wins" : 32,
-		"nominations" : 21,
-		"text" : "32 wins & 21 nominations."
-	},
-	"type" : "movie"
-}
 {
 	"_id" : ObjectId("5d7e92671ddae9be2e725a15"),
 	"title" : "Main Hoon Na",
@@ -591,18 +442,16 @@ db.movieDetails.find({"actors.0":"Shah Rukh Khan"}).pretty()
 ```
 ---
 
-### Projections:
-By default, MongoDB returns all fields for all matching documents. Projections reduce network overhead and processing requirements by limiting the fields that are returned in the results documents. Projections are defined as the second argument to the `find()` method. 
+### Projections
+By default, MongoDB returns all fields for all matching documents as seen in all the results above. Projections reduce network overhead and processing requirements by limiting the fields that are returned in the results documents. Projections are passed as the second argument to the `find()` method. 
 
 **Exercise 10** :computer: 
 
-In the output below, the query returns the movie titles as expected but the `_id` field gets returned by default too. 
+ Use `<field name>: 1` to include that field in the results document and/or use `<field name>: 0` to exclude that field. Note that the **values** `1` and `0` stand for **inclusion** and **exclusion** in the resulting document respectively. In the query below, we are asking only for the `title` field to be shown in the output. 
 
 **query:**
 ```javascript
-db.movieDetails.find({
-    "genres":["Action", "Adventure"]},
-    {"title":1})
+db.movieDetails.find({"genres":["Action", "Adventure"]},{"title":1})
 ```
 
 **result:**
@@ -615,9 +464,11 @@ db.movieDetails.find({
 { "_id" : ObjectId("5d7e92671ddae9be2e725c77"), "title" : "Bo ming chan dao duo ming qiang" }
 ```
 
+In the output below, the query returns the `title` field as expected but the `_id` field gets returned by default too.
+
 **Exercise 11** :computer: 
 
-In order to exclude the `_id` field, we have to state it explicitly in our query.
+In order to exclude the `_id` field, we have to explicitly exclude it in our query.
 
 **query:**
 ```javascript
@@ -634,14 +485,10 @@ db.movieDetails.find({"genres":["Action", "Adventure"]},
 { "title" : "Bo ming chan dao duo ming qiang" }
 ```
 
-All in all, use `<field name>: 1` to include that field in the results document and/or use `<field name>: 0` to exclude that field. 
+**Exercise 12** :computer: 
 
-What's the output of the following query?
+Share with the rest of the class the kind of movies you like by writing 3 interesting queries against this database, at the same time limiting the resulting documents to fields that you find relevant. 
 
-```javascript
-db.movieDetails.find({
-    "genres":["Action", "Adventure"]},
-    {"_id": 0, "director": 0, "writers": 0, "actors": 0})
-    .pretty()
-```
+For example, movies that were part of both the 'Action' and 'Adventure' genres! :boom: 
+
 ---
