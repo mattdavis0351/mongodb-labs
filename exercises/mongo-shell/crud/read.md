@@ -3,12 +3,15 @@
 ### Counting records
 **Exercise 1** :computer:
 
-A simple `count()` operation in order to count the number of documents in the collection. `count()` returns the total of all documents and does not parse for `distinct` documents.  
+A simple `count()` operation in order to count the number of documents in the collection.
 
 **query:**
 ```javascript
 db.movieDetails.count()
 ```
+
+:bell:`count()` returns the total of all documents, which means duplicate documents will be counted.  
+To get a count of unique values replace `count()` with `distinct()`.
 
 ---
 
