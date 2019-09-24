@@ -10,8 +10,9 @@ A simple `count()` operation in order to count the number of documents in the co
 db.movieDetails.count()
 ```
 
-:bell:`count()` returns the total of all documents, which means duplicate documents will be counted.  
+:mushroom:`count()` returns the total of all documents, which means duplicate documents will be counted.  
 To get a count of unique values replace `count()` with `distinct()`.
+
 
 ---
 
@@ -19,7 +20,9 @@ To get a count of unique values replace `count()` with `distinct()`.
 
 **Exercise 2** :computer: 
 
-In order to filter data, add a parameter as the first argument to the `count()` method. Parameters exist as objects, and are therefore `key:value` pairs. In the query below, `rated` is the **key** and `PG-13` is the **value**.
+In order to filter data, add a parameter as the first argument to the `count()` method. Parameters exist as objects, and are therefore `key:value` pairs. 
+
+In the query below, `rated` is the **key** and `PG-13` is the **value**.
 
 **query:**
 ```javascript
@@ -31,7 +34,7 @@ db.movieDetails.count({"rated": "PG-13"})
 
 **Exercise 3** :computer:
 
-Adding another parameter using the `,` operator **ANDs** the filters and returns the matching results.
+Adding another parameter using the `,` operator **AND**s the filters and returns the matching results.
 
  
 
@@ -40,13 +43,21 @@ Adding another parameter using the `,` operator **ANDs** the filters and returns
 ```javascript
 db.movieDetails.count({"rated": "PG-13", "year":1993})
 ```
+As you can see the documents returned are only those where BOTH parameters match.
+
+:book: [Read More](https://docs.mongodb.com/manual/reference/command/count/index.html) about the `count()` method
+
 ---
 
 ### Using the "find()" method
 
 **Exercise 4** :computer:
 
-In order to display the entire document, use the `find()` method.
+To display an entire document, use the `find()` method.
+
+:arrow_right: When using `find()` with no additional parameters, every document in the database will be returned. 
+
+Usually you will want to add parameters to `find()` like you see in the example below.  Remember that `,` is an **AND** operator.
 
 **query:**
 ```javascript
@@ -62,7 +73,9 @@ As you can see, the output contains the entire document in a single line. This m
 
 **Exercise 5** :computer: 
 
-Chain the `pretty()` method to the `find()` method for a prettier print of the output where each new field is written on a new line.
+Like JavaScript, the MongoDB query language can chain methods together to refine the output of your queries.  Chaining happens by placing a `.` between method names.
+
+Let's chain the `pretty()` method to the `find()` method for a prettier print of the output where each new field is written on a new line.
 
 **query:**
 ```javascript
@@ -115,6 +128,8 @@ db.movieDetails.find({"rated": "PG-13", "year":1993}).pretty()
 	"type" : "movie"
 }
 ```
+Much nicer on our :eyes:!
+
 ---
 
 ### Filtering embedded documents
@@ -128,6 +143,8 @@ Driving down the hierarchy in documents can be done using the dot notation. In t
 ```javascript
 db.movieDetails.find({"imdb.rating":9.5}).pretty()
 ```
+:arrow_right: It is important to note that if the **value** of the **key** is an array, you will need to use the aggregate pipeline instead of a simple `find()` method.
+
 ---
 
 ### Filtering array values
@@ -137,7 +154,9 @@ db.movieDetails.find({"imdb.rating":9.5}).pretty()
 When it comes to matching on array values, we can match in 3 ways:
 * the entire array
 
-The following query matches documents where the `genres` array contains **exactly** 'Documentary' followed by 'Family', in that order. Note that arrays that contain 'Documentary', 'Family' and any other genre like 'Drama' or 'Comedy' are not returned because it is **not** an exact match of the filter criteria. 
+The following query matches documents where the `genres` array contains **exactly** 'Documentary' followed by 'Family', in that order. Note that arrays that contain 'Documentary', 'Family' and any other genre like 'Drama' or 'Comedy' are not returned because they are not an **exact** match of the filter criteria. 
+
+
 
  **query:**
 
@@ -218,6 +237,7 @@ db.movieDetails.find({"genres":["Documentary", "Family"]}).pretty()
 	"type" : "movie"
 }
 ```
+:arrow_right: Documents with the array of `genres:["Family","Documentary"]` will also not be return for the same reason.
 
 **Exercise 8** :computer: 
 * any element in the array
@@ -346,6 +366,8 @@ db.movieDetails.find({"genres":"Musical"}).pretty()
 	"type" : "movie"
 }
 ```
+:right_arrow: This method only works if the **value** is not an object.  We will cover how to access objects in an array in a later exercise.
+
 **Exercise 9** :computer: 
 
 * array position (for eg: arrays whose first element match a particular criteria)
@@ -487,11 +509,28 @@ db.movieDetails.find({"genres":["Action", "Adventure"]},
 { "title" : "Bruce Li the Invincible Chinatown Connection" }
 { "title" : "Bo ming chan dao duo ming qiang" }
 ```
+:book:[Read More](https://docs.mongodb.com/manual/reference/method/db.collection.find/index.html) about the `find()` method.
 
-**Exercise 12** :computer: 
+---
+
+**Lab 1: :alarm_clock: 10 minutes** 
 
 Share with the rest of the class the kind of movies you like by writing 3 interesting queries against this database, at the same time limiting the resulting documents to fields that you find relevant. 
 
 For example, movies that were part of both the 'Action' and 'Adventure' genres! :boom: 
 
----
+
+**Lab 2: :alarm_clock: 15 minutes**
+Using `some other dbs we have` break into small groups and explore the documents in this database.  Create a small 2-3 slide long presentation about the data.  
+
+Some questions to consider while exploring:
+- How is this data structured?
+- Is there anything interesing to me about this data?
+- Is the data malformed, incorrect or incomplete?
+- What are the challenges you faced while exploring this data?
+
+**Lab 3: :alarm_clock: 15 minutes**
+Present your results from **Lab 2** and answer any questions your classmates may have.
+
+
+
