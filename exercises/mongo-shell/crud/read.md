@@ -366,7 +366,7 @@ db.movieDetails.find({"genres":"Musical"}).pretty()
 	"type" : "movie"
 }
 ```
-:right_arrow: This method only works if the **value** is not an object.  We will cover how to access objects in an array in a later exercise.
+:arrow_right: This method only works if the **value** is not an object.  We will cover how to access objects in an array in a later exercise.
 
 **Exercise 9** :computer: 
 
@@ -465,6 +465,7 @@ db.movieDetails.find({"actors.0":"Shah Rukh Khan"}).pretty()
 	"type" : "movie"
 }
 ```
+
 ---
 
 ### Projections
