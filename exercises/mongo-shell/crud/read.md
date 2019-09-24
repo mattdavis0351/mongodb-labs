@@ -4,6 +4,7 @@
 **Exercise 1** :computer:
 
 A simple `count()` operation in order to count the number of documents in the collection.
+(we should figure out if unique or not)
 
 **query:**
 ```javascript
