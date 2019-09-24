@@ -464,7 +464,7 @@ db.movieDetails.find({"genres":["Action", "Adventure"]},{"title":1})
 { "_id" : ObjectId("5d7e92671ddae9be2e725c77"), "title" : "Bo ming chan dao duo ming qiang" }
 ```
 
-In the output below, the query returns the `title` field as expected but the `_id` field gets returned by default too.
+In the output above, the query returns the `title` field as expected but the `_id` field gets returned by default too.
 
 **Exercise 11** :computer: 
 
