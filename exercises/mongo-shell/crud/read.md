@@ -10,7 +10,7 @@ A simple `count()` operation in order to count the number of documents in the co
 db.movieDetails.count()
 ```
 
-:arrow_right:`count()` returns the total of all documents, which means duplicate documents will be counted.  
+:arrow_right: `count()` returns the total of all documents, which means duplicate documents will be counted.  
 To get a count of unique values replace `count()` with `distinct()`.
 
 
