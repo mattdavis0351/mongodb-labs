@@ -3,8 +3,7 @@
 ### Counting records
 **Exercise 1** :computer:
 
-A simple `count()` operation in order to count the number of documents in the collection.
-(we should figure out if unique or not)
+A simple `count()` operation in order to count the number of documents in the collection. `count()` returns the total of all documents and does not parse for `distinct` documents.  
 
 **query:**
 ```javascript
