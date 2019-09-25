@@ -533,5 +533,5 @@ Some questions to consider while exploring:
 **Lab 3: :alarm_clock: 15 minutes**
 Present your results from **Lab 2** and answer any questions your classmates may have.
 
-
+**are we okay with this :arrow_up: ... or should we expand?**
 
