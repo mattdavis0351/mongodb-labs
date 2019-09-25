@@ -84,6 +84,63 @@ db.movieDetails.find({"rated": {"$in": ["R", "PG", "PG-13"]}},
 
 **Exercise 5** :computer: 
 
-Use the `$nin` operator (**not in** operator) to match **none** of the values specified in the array. 
+Take 5 minutes :alarm_clock: to explore the `$nin` operator (**not in** operator). Pick an array of your liking and check to see if the match condition matches **none** of the values specified in the array. 
 
+---
+---
+
+## Element Operators
+
+Since MongoDB is a non relational database:
+* there can be fields which are **present in one document** but **absent in another document**. 
+
+* there can also be fields in a collection that have **different value types** across documents. 
+
+In the following exercises, we'll learn about operators that help us explore these aspects of our collection. 
+
+**Exercise 1** :computer: 
+
+Using the `$exists` operator, count the number of documents which contain the field `tomato.consensus`.
+
+**query:**
+```javascript
+db.movieDetails.count({"tomato.consensus": {"$exists": true}})
+```
+
+**Exercise 2** :computer: 
+
+* Using the `$exists` operator, count the number of documents which do **not** contain the field `tomato.consensus`. 
+
+    *Hint: use `{"$exists": false}`*
+
+* Now add up the results obtained in exercises 1 and 2. Is it the same as the total collection size?
+
+* Take 5 minutes :alarm_clock: to explore the document structure with and without these fields using the `find()` method. 
+
+* Is the output of the following query the same as the one with `{"$exists": false}`? 
+
+    **query:**
+
+    ```javascript
+    db.movieDetails.count({"tomato.consensus": null})
+    ```
+    
+:arrow_right: Note that the query above returns not only documents where the `tomato.consensus` field is `null` but also those documents where the `tomato.consensus` field is absent. Check it out for yourself!
+
+**Exercise 3** :computer: 
+
+Explore the various datatypes present per field using the `$type` operator. Refer to the [documentation](https://docs.mongodb.com/manual/reference/operator/query/type/#op._S_type) for additional reference. 
+
+To help you get started, here's an example:
+
+**query:**
+```javascript
+db.movieDetails.find({"plot": {"$type": "string"}}).pretty()
+```
+
+**query:**
+```javascript
+db.movieDetails.find({"plot": {"$type": "null"}}).pretty()
+```
+---
 ---
