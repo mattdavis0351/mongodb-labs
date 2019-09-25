@@ -142,4 +142,3 @@ db.movieDetails.find({"plot": {"$type": "string"}}).pretty()
 db.movieDetails.find({"plot": {"$type": "null"}}).pretty()
 ```
 ---
----
