@@ -87,7 +87,6 @@ db.movieDetails.find({"rated": {"$in": ["R", "PG", "PG-13"]}},
 Use the `$nin` operator (**not in** operator) to match **none** of the values specified in the array. 
 
 ---
----
 
 ## Element Operators
 
