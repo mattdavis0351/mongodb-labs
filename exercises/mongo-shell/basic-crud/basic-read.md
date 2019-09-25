@@ -514,15 +514,21 @@ db.movieDetails.find({"genres":["Action", "Adventure"]},
 
 ---
 
-**Lab 1: :alarm_clock: 10 minutes** 
+## Group Activities
+During this time the class should split into :five: groups to complete each section.
+
+**Activity: :alarm_clock: 15 minutes** 
 
 Share with the rest of the class the kind of movies you like by writing 3 interesting queries against this database, at the same time limiting the resulting documents to fields that you find relevant. 
 
 For example, movies that were part of both the 'Action' and 'Adventure' genres! :boom: 
 
+Using commands like:
+- `show dbs`
+- `use <database>`
+- `show collections`
 
-**Lab 2: :alarm_clock: 15 minutes**
-Using `some other dbs we have` break into small groups and explore the documents in this database.  Create a small 2-3 slide long presentation about the data.  
+Explore the different datasets available on your workstation.  Be creative and try to find interesting things.  
 
 Some questions to consider while exploring:
 - How is this data structured?
@@ -530,8 +536,11 @@ Some questions to consider while exploring:
 - Is the data malformed, incorrect or incomplete?
 - What are the challenges you faced while exploring this data?
 
-**Lab 3: :alarm_clock: 15 minutes**
-Present your results from **Lab 2** and answer any questions your classmates may have.
+**Presentation: :alarm_clock: 25 minutes**
+Each group will prepare a small, **5 minute**, 2-3 slide presentation about the datasets.
 
-**are we okay with this :arrow_up: ... or should we expand?**
+Present your results from **Lab 2** and answer any questions your classmates may have.
+Be sure to include your interesting movie :clapper: queries :+1:
+
+
 
