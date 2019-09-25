@@ -50,7 +50,7 @@ db.movieDetails.find({"runtime": {"$gte":120, "$lt": 180}},
 
 **Exercise 3** :computer: 
 
-List the movies which not only had a runtime greater than 3 hours but were also highly rated.
+List the movies which had a runtime longer than 3 hours and had a rating higher than 8
 
 **query:**
 ```javascript=
@@ -60,7 +60,7 @@ db.movieDetails.find({"runtime": {"$gt": 180},
 ```
 ---
 
-### The "$ne" operator
+### The "$ne" query operator
 
 `ne` stands for **not equal**. Therefore the use of this operator filters out records where the matching condition is not true.
 
@@ -88,7 +88,7 @@ In a future exercise, we'll see how to find documents which do not have a given 
 
 ---
 
-### The "$in" operator
+### The "$in" query operator
 
 The `$in` operator allows us to specify 1 or more values, any 1 of which if matched, causes a resulting document to be returned. Note that the value of `$in` should always be an array. 
 
@@ -104,7 +104,7 @@ db.movieDetails.find({"rated": {"$in": ["R", "PG", "PG-13"]}},
 
 **Exercise 5** :computer: 
 
-Use the `$nin` operator (**not in** operator) to match **none** of the values specified in the array. 
+Use the `$nin` query operator (**not in** operator) to match **none** of the values specified in the array. 
 
 ---
 
