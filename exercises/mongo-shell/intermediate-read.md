@@ -1,6 +1,25 @@
 ## Comparison Operators
 
-These operators allow us to match a field's value relative to another value. 
+
+Comparison operators are used in conditions that compare one expression with another, typically containing a boolean return value.  
+
+The MongoDB query language is unique because it uses **comparison Operators** in two different ways:  
+- Comparison Query Operators
+- Comparison Aggregation Operators
+
+Let's take a quick :eyes: at what is available for **Query Selector** operations.
+
+**Comparison Query Operators**
+|Name|Description|
+|---|---|
+|$eq|Matches values that are equal to a specified value.|
+|$gt | Matches values that are greater than a specified value.|
+|$gte | Matches values that are greater than or equal to a specified value.|
+|$in | Matches any of the values specified in an array.|
+|$lt | Matches values that are less than a specified value.|
+|$lte | Matches values that are less than or equal to a specified value.|
+|$ne | Matches all values that are not equal to a specified value.|
+|$nin | Matches none of the values specified in an array.|
 
 ### Working with a single field
 
