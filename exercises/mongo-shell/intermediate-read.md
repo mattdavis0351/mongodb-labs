@@ -10,6 +10,7 @@ The MongoDB query language is unique because it uses **comparison Operators** in
 Let's take a quick :eyes: at what is available for **Query Selector** operations.
 
 **Comparison Query Operators**
+
 |Name|Description|
 |---|---|
 |$eq|Matches values that are equal to a specified value.|
