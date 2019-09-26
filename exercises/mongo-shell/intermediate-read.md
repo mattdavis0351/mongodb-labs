@@ -347,6 +347,6 @@ As the name suggests, this operator deals with the length of an array.
         {"_id": 0, "title": 1, "countries": 1})
     ```
     
-* Similar to the previous query, find the maximum number of countries that a movie(s) was shot in. It'll take a little trial and error but code away! 
+* Similar to the previous query, take **5 minutes** ⏰ to find the maximum number of countries that a movie(s) was shot in. It'll take a little trial and error but code away! 
 
 ---
