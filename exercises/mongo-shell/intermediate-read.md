@@ -171,3 +171,126 @@ db.movieDetails.find({"plot": {"$type": "string"}}).pretty()
 db.movieDetails.find({"plot": {"$type": "null"}}).pretty()
 ```
 ---
+
+## Array Operators
+
+In the following exercises, we'll look at operators for array fields. 
+
+### The "$all" query operator
+
+`$all` matches array fields against an array of elements. A document is returned when all the elements listed in the query are found in the document's array field. 
+
+:arrow_right: Elements in the document's array are **not** required to be in the exact order as specified in the query. 
+
+**Exercise 1** :computer: 
+
+Use the `$all` operator to find movies which were both a Drama and a Comedy. 
+
+**query:**
+```javascript
+db.movieDetails.find({"genres": {"$all": ['Drama', 'Comedy']}}, 
+    {"_id": 0, "title": 1, "genres": 1})
+```
+
+**result:** (Only a part of the output has been shown.)
+```javascript
+{ "title" : "The Cowboy and the Lady", "genres" : [ "Comedy", "Drama", "Romance" ] }
+{ "title" : "Quick Gun Murugun: Misadventures of an Indian Cowboy", "genres" : [ "Action", "Comedy", "Drama" ] }
+{ "title" : "Wild Tales", "genres" : [ "Comedy", "Drama", "Thriller" ] }
+{ "title" : "Down by Law", "genres" : [ "Comedy", "Crime", "Drama" ] }
+```
+:arrow_right: As you can see, returned documents contain both Drama and Comedy `genres` in addition to others (like Romance, Thriller etc) which were not specified in our query. Also note that the order of elements did not matter. 
+
+---
+
+### The "$elemMatch" query operator
+
+One of the more powerful operators for arrays is `$elemMatch`. It matches array elements which are present in the same position and is best explained through an example. 
+
+Copy and run the following code in your mongo shell: (Revenue is in million dollars.)
+```javascript
+martian = db.movieDetails.findOne({"title": "The Martian"})
+delete martian._id
+martian.boxOffice = [
+    {"country": "North America", "revenue": 228.4},
+    {"country": "Others", "revenue": 401.7}
+]
+db.movieDetails.insertOne(martian)
+```
+
+What did we just do?!
+Simply put:
+* we created a variable called `martian`
+* added a reference to the document titled `"The Martian"` within that variable
+* went on to add another field called `boxOffice` to that variable which turns out to be an **array of objects**
+* inserted that variable in our collection as a document of its own
+
+Now when you run:
+```javascript
+db.movieDetails.find({"title": "The Martian"}).pretty()
+```
+you'll see that 2 documents are returned. One's the original document and the other is the one we just created with an additional `boxOffice` field. 
+
+The point of this was to add an **array of objects** field to our collection. Now onto the exercise where we'll see how to leverage `$elemMatch` to query this field. 
+
+**Exercise 2** :computer: 
+
+Take 5 minutes :alarm_clock: to find the movies where the `boxOffice` revenue in "North America" was greater than 
+* $200m 
+* $400m
+
+How many of you ran similar queries?
+```javascript
+db.movieDetails.find({"boxOffice.country": "North America", 
+    "boxOffice.revenue": {"$gt": 200}}).pretty()
+    
+db.movieDetails.find({"boxOffice.country": "North America", 
+    "boxOffice.revenue": {"$gt": 400}}).pretty()
+```
+
+:arrow_right: Note that the first query runs correctly by returning the document with "The Martian" `boxOffice`, but the second query returns the same result even though it is :x:!!! 
+There is no movie in our collection which has a revenue greater than $400m in North America. 
+
+This happened because the query ran the following checks: 
+* is `boxOffice.country` equal to "North America" :white_check_mark:
+* is `boxOffice.revenue` greater than $400m :white_check_mark:
+
+Both checks were satisfied at **different array positions**!!!
+
+Here's where `$elemMatch` comes in. It ensures that array elements present **in the same position** are evalauted. 
+
+Try the following 2 queries. 
+```javascript
+db.movieDetails.find({"boxOffice": 
+    {"$elemMatch": 
+        {"country": "North America", "revenue": 
+            {"$gt": 200}}}}).pretty()
+            
+db.movieDetails.find({"boxOffice": 
+    {"$elemMatch": 
+        {"country": "North America", "revenue": 
+            {"$gt": 400}}}}).pretty()
+```
+
+See the difference?!
+
+---
+
+### The "$size" query operator
+
+As the name suggests, this operator deals with the length of an array. 
+
+**Exercise 3** :computer: 
+
+* Which movies were filmed in just one country?
+
+    **query:**
+
+    ```javascript
+    db.movieDetails.find({"countries": {"$size": 1}}, 
+        {"_id": 0, "title": 1, "countries": 1})
+    ```
+    
+* Similar to the previous query, find the maximum number of countries that a movie(s) was shot in. It'll take a little trial and error but code away! 
+
+---
