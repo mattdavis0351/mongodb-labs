@@ -141,11 +141,13 @@ db.movieDetails.find({"$or": [
 
 ### The "$and" operator
 
-As you already know, MongoDB implicitly **AND**s the filters when separated by `,` in the query. 
+As you [already know](../blob/master/exercises/mongo-shell/basic-crud/basic-read.md#Filtering-on-multiple-fields), MongoDB implicitly **AND**s the filters when separated by `,` in the query. 
 
 **Exercise 2** :computer: 
 
-Run the following query:
+To cover this next point we need to generate some output first.  Run the query below to get the output we need. 
+
+:bulb: Can you explain the different operators and parameters in this query without seeing the output?
 ```javascript
 db.movieDetails.find({
     "tomato.meter": {"$lt": 50}, 
@@ -161,7 +163,7 @@ db.movieDetails.find({
 { "title" : "Journey to the West", "tomato" : { "meter" : 93 } }
 ```
 
-Ideally, the 2 filter conditions would be ANDed. But :eyes: closely at the results and you'll see that the first filter condition `tomato.meter": {"$lt": 50}` was ignored. The result contains documents which have `tomato.meter` ratings greater than 50 as well. Why?
+Ideally, the 2 filter conditions would be **AND**ed. But :eyes: closely at the results and you'll see that the first filter condition `tomato.meter": {"$lt": 50}` was ignored. The result contains documents which have `tomato.meter` ratings greater than 50 as well. Why?
 
 :arrow_right: MongoDB requires **unique** key values to be provided in its queries. In cases like the one above, where both key values are identical (`tomato.meter` in both filters), the very last filter overwrites all the previous filters and documents that satisfy the last filter are returned. 
 
