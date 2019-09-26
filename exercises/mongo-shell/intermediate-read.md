@@ -128,7 +128,10 @@ This operator **OR**s the filters stated in a query and returns documents where 
 
 Write a query to list movies whose `imdb.rating` is greater than 8.5 or `metacritic` rating is greater than 85.
 
-:arrow_right: Note that the `$or` operator takes an **array** of values. 
+:arrow_right: Note that the `$or` operator takes an **array** of values.
+
+Syntax Example:
+`{"$or":[{field:condition}, {field:condition}]}`
 
 **query:**
 ```javascript
