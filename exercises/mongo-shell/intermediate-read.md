@@ -14,7 +14,7 @@ There are numerous operators that we can use in our queries to answer more and m
 
 Comparison operators are used in conditions that compare one expression with another, typically containing a boolean return value.  
 
-The MongoDB query language is unique because it uses **comparison Operators** in two different ways:  
+The MongoDB query language is unique because it uses **Comparison Operators** in two different ways:  
 - Comparison Query Operators
 - Comparison Aggregation Operators
 
