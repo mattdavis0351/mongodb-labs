@@ -7,6 +7,8 @@ There are numerous operators that we can use in our queries to answer more and m
 * Element Operators
 * Array Operators
 
+[Read more](https://docs.mongodb.com/manual/reference/operator/query/) :book: about query selectors. 
+
 ## Comparison Operators
 
 
