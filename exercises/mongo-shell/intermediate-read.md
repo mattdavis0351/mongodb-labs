@@ -119,6 +119,58 @@ Use the `$nin` query operator (**not in** operator) to match **none** of the val
 
 ---
 
+## Logical Operators
+
+### The "$or" operator
+This operator **OR**s the filters stated in a query and returns documents where atleast 1 of the filters is true. 
+
+**Exercise 1** :computer: 
+
+Write a query to list movies whose `imdb.rating` is greater than 8.5 or `metacritic` rating is greater than 85.
+
+:arrow_right: Note that the `$or` operator takes an **array** of values. 
+
+**query:**
+```javascript
+db.movieDetails.find({"$or": [
+    {"imdb.rating": {"$gt": 8.5}}, 
+    {"metacritic": {"$gt": 85}}]}, 
+        {"_id": 0, "title": 1, "imdb.rating": 1, "metacritic": 1})
+```
+---
+
+### The "$and" operator
+
+As you already know, MongoDB implicitly **AND**s the filters when separated by `,` in the query. 
+
+**Exercise 2** :computer: 
+
+Run the following query:
+```javascript
+db.movieDetails.find({
+    "tomato.meter": {"$lt": 50}, 
+    "tomato.meter": {"$ne": null}}, 
+    {"_id": 0, "title": 1, "tomato.meter": 1})
+```
+**result:** (Only a part of the result has been shown.)
+```javascript
+{ "title" : "Once Upon a Time in the West", "tomato" : { "meter" : 98 } }
+{ "title" : "A Million Ways to Die in the West", "tomato" : { "meter" : 33 } }
+{ "title" : "Wild Wild West", "tomato" : { "meter" : 17 } }
+{ "title" : "Slow West", "tomato" : { "meter" : 92 } }
+{ "title" : "Journey to the West", "tomato" : { "meter" : 93 } }
+```
+
+Ideally, the 2 filter conditions would be ANDed. But :eyes: closely at the results and you'll see that the first filter condition `tomato.meter": {"$lt": 50}` was ignored. The result contains documents which have `tomato.meter` ratings greater than 50 as well. Why?
+
+:arrow_right: MongoDB requires **unique** key values to be provided in its queries. In cases like the one above, where both key values are identical (`tomato.meter` in both filters), the very last filter overwrites all the previous filters and documents that satisfy the last filter are returned. 
+
+This is where `$and` finds its use case. As you might've guessed, it is used to AND filter conditions where the key values are **not unique**. 
+
+Take 5 minutes :alarm_clock: to run the above query using the `$and` operator. Keep in mind that the `$and` takes an **array** of values just like `$or`.
+
+---
+
 ## Element Operators
 
 Since MongoDB is a non relational database:
@@ -261,7 +313,7 @@ Both checks were satisfied at **different array positions**!!!
 
 Here's where `$elemMatch` comes in. It ensures that array elements present **in the same position** are evalauted. 
 
-Try the following 2 queries. 
+Try the following 2 queries: 
 ```javascript
 db.movieDetails.find({"boxOffice": 
     {"$elemMatch": 
