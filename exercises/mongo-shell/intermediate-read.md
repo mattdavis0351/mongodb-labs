@@ -371,3 +371,21 @@ Some questions to consider while exploring:
 
 **Presentation: :alarm_clock: 25 minutes**
 Present your results from **Group Activities** and answer any questions your classmates may have.
+## Group Activities
+During this time the class should split into :five: groups to complete each section.
+
+**Activity 1: :alarm_clock: 15 minutes** 
+
+Let's figure out some weekend plans! Get together with the rest of your group and look at movies from a genre(s) you all like. Pick a couple of highly rated movies that you haven't watched yet and let the rest of the class know that these will be on your list! Also, are there some medium or low rated movies from that genre(s) that you've already watched? Do you agree with the rating? Why?
+
+**Activity 2: :alarm_clock: 15 minutes**
+
+Explore the different datasets available on your workstation.  Be creative and try to find interesting things.  
+Some questions to consider while exploring:
+- How is this data structured?
+- Is there anything interesting to me about this data?
+- Is the data malformed, incorrect or incomplete?
+- What are the challenges you faced while exploring this data?
+
+**Presentation: :alarm_clock: 25 minutes**
+Present your results from **Group Activities** and answer any questions your classmates may have.
