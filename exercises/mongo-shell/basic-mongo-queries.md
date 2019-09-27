@@ -1,7 +1,7 @@
-## READ Operations
+## Read Operations
 
 ### Counting records
-**Exercise 1** :computer:
+**Exercise 4** :computer:
 
 A simple `count()` operation in order to count the number of documents in the collection.
 
@@ -18,7 +18,7 @@ To get a count of unique values replace `count()` with `distinct()`.
 
 ### Filtering on a single field
 
-**Exercise 2** :computer: 
+**Exercise 5** :computer: 
 
 In order to filter data, add a parameter as the first argument to the `count()` method. Parameters exist as objects, and are therefore `key:value` pairs. 
 
@@ -32,7 +32,7 @@ db.movieDetails.count({"rated": "PG-13"})
 
 ### Filtering on multiple fields
 
-**Exercise 3** :computer:
+**Exercise 6** :computer:
 
 Adding another parameter using the `,` operator **AND**s the filters and returns the matching results.
 
@@ -51,7 +51,7 @@ As you can see the documents returned are only those where BOTH parameters match
 
 ### Using the "find()" method
 
-**Exercise 4** :computer:
+**Exercise 7** :computer:
 
 To display an entire document, use the `find()` method.
 
@@ -71,7 +71,7 @@ db.movieDetails.find({"rated": "PG-13", "year":1993})
 
 As you can see, the output contains the entire document in a single line. This makes it hard to discern the layout of the document. We'll cover easy document parsing in the next exercise.
 
-**Exercise 5** :computer: 
+**Exercise 8** :computer: 
 
 Like JavaScript, the MongoDB query language can chain methods together to refine the output of your queries.  Chaining happens by placing a `.` between method names.
 
@@ -134,7 +134,7 @@ Much nicer on our :eyes:!
 
 ### Filtering embedded documents
 
-**Exercise 6** :computer:
+**Exercise 9** :computer:
 
 Driving down the hierarchy in documents can be done using the dot notation. In the query below, we access the `rating` field (which is nested inside the `imdb` field) using `imdb.rating` as the **key**.
 
@@ -149,7 +149,7 @@ db.movieDetails.find({"imdb.rating":9.5}).pretty()
 
 ### Filtering array values
 
-**Exercise 7** :computer:
+**Exercise 10** :computer:
 
 When it comes to matching on array values, we can match in 3 ways:
 * the entire array
@@ -239,7 +239,7 @@ db.movieDetails.find({"genres":["Documentary", "Family"]}).pretty()
 ```
 :arrow_right: Documents with the array of `genres:["Family","Documentary"]` will also not be return for the same reason.
 
-**Exercise 8** :computer: 
+**Exercise 11** :computer: 
 * any element in the array
 
 A more common search criteria is filtering out a single element in the array, irrespective of its array position. Note that 'Musical' is matched irrespective of its position in the `genres` array. 
@@ -368,7 +368,7 @@ db.movieDetails.find({"genres":"Musical"}).pretty()
 ```
 :arrow_right: This method only works if the **value** is not an object.  We will cover how to access objects in an array in a later exercise.
 
-**Exercise 9** :computer: 
+**Exercise 12** :computer: 
 
 * array position (for eg: arrays whose first element match a particular criteria)
 
@@ -471,7 +471,7 @@ db.movieDetails.find({"actors.0":"Shah Rukh Khan"}).pretty()
 ### Projections
 By default, MongoDB returns all fields for all matching documents as seen in all the results above. Projections reduce network overhead and processing requirements by limiting the fields that are returned in the results documents. Projections are passed as the second argument to the `find()` method. 
 
-**Exercise 10** :computer: 
+**Exercise 13** :computer: 
 
  Use `<field name>: 1` to include that field in the results document and/or use `<field name>: 0` to exclude that field. Note that the **values** `1` and `0` stand for **inclusion** and **exclusion** in the resulting document respectively. In the query below, we are asking only for the `title` field to be shown in the output. 
 
@@ -492,7 +492,7 @@ db.movieDetails.find({"genres":["Action", "Adventure"]},{"title":1})
 
 In the output above, the query returns the `title` field as expected but the `_id` field gets returned by default too.
 
-**Exercise 11** :computer: 
+**Exercise 14** :computer: 
 
 In order to exclude the `_id` field, we have to explicitly exclude it in our query.
 
@@ -511,6 +511,86 @@ db.movieDetails.find({"genres":["Action", "Adventure"]},
 { "title" : "Bo ming chan dao duo ming qiang" }
 ```
 :book:[Read More](https://docs.mongodb.com/manual/reference/method/db.collection.find/index.html) about the `find()` method.
+
+---
+
+## Update Operations
+
+The MongoDB query language supports 3 update operations:
+* `updateOne()`
+* `updateMany()`
+* `replaceOne()` - [Read more](https://docs.mongodb.com/manual/reference/method/db.collection.replaceOne/#db.collection.replaceOne) :book: about this operator. 
+
+**Exercise 15** :computer: 
+
+Let's turn our attention towards movies made in 🇮🇳 ! I bet all of you have either heard of or watched "Taare Zameen Par" but unfortunately this collection hasn't got the name right! 
+
+* Take **5 minutes** :alarm_clock: to find out what the movie `title` is in our collection! Feel free to use the internet to look up identifying information like the release year or the actor/director/writer names to use in your query filter. 
+
+* Once you have the name, let's update it to reflect the correct name "Taare Zameen Par". 
+
+Here's how to perform the update operation:
+```javascript
+db.movieDetails.updateOne(
+    {<your uniquely identifying filter as key: value pair>}, 
+    {"$set": {"title": "Taare Zameen Par"}}
+    )
+```
+
+**Exercise 16** :computer: 
+
+MongoDB offers multiple operators that can be used in its update operations. In the exercise above, we looked at the `$set` operator. 
+
+|Name|Description|
+|---|---|
+|`$set`|Sets the value of a field in a document|
+|`$unset`|Removes the specified field from a document|
+|`$currentDate`|Sets the value of a field to current date, either as a Date or a Timestamp|
+|`$inc`|Increments the value of a field by a specified amount|
+|`$mul`|Multiplies the value of the field by the specified amount|
+|`$min`|Only updates the field if the specified value is less than the existing field value.|
+|`$max`|Only updates the field if the specified value is greater than the existing field value.|
+|`$setOnInsert`|Sets the value of a field if an update results in an insert of a document. Has no effect on update operations that modify existing documents.|
+|`$rename`|Renames a field|
+
+
+Take **10 minutes** :alarm_clock: to go through this list and write an interesting `$updateMany()` query. 
+
+
+:arrow_right: Note that `updateMany()` will make the same modification to all the documents that match the given filter. 
+
+---
+
+## Delete Operations
+
+The MongoDB query language supports 2 delete operations:
+* `deleteOne()`
+* `deleteMany()`
+
+**Exercise 17** :computer: 
+
+In our `movieDetails` collection, there is only 1 movie from the `year` 2018 with a `title` "QQ Speed". To perform the exercise, delete this record. 
+
+**query:**
+```javascript
+db.movieDetails.deleteOne({"title": "QQ Speed"})
+```
+Alternatively, you could use:
+```javascript
+db.movieDetails.deleteOne({"year": 2018})
+```
+since this filter would also uniquely identify the movie "QQ Speed", considering this collection has only 1 movie from that year. 
+
+**result:**
+```javascript
+{ "acknowledged" : true, "deletedCount" : 1 }
+```
+
+The result confirms that the `deleteOne()` operation was successful, at the same time telling us the number of documents that were deleted. 
+
+**Exercise 18** :computer: 
+
+Our `movieDetails` collection has a few movies from the 1800s!!! Take **5 minutes** :alarm_clock: to delete all those movies using `deleteMany()`.
 
 ---
 
@@ -537,6 +617,7 @@ Some questions to consider while exploring:
 - What are the challenges you faced while exploring this data?
 
 **Presentation: :alarm_clock: 25 minutes**
+
 Each group will prepare a small, **5 minute**, 2-3 slide presentation about the datasets.
 
 Present your results from **Lab 2** and answer any questions your classmates may have.
