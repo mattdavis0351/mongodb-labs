@@ -746,10 +746,15 @@ During this time the class should split into :five: groups to complete each sect
 
 **Activity: :alarm_clock: 15 minutes** 
 
+What is one topic that interests you most as a group?! Is it technology, climate, politics, cars, TV shows, fashion, history, outer space...? Pick a topic and write your own collection!!!
 
+Here are a few tips to get you started:
+* Figure out your document structure
+* Come up with atleast 3 documents to insert into the collection
+* Show off your creativity and skills :sunglasses: by using `key:value` pairs containing arrays and/or objects.
 
 **Presentation: :alarm_clock: 25 minutes**
 
 Each group will prepare a small, **5 minute**, 2-3 slide presentation about the dataset.
 
-Present your results from the **Group Activity** and answer any questions your classmates may have.
+Present your results from the **Group Activity** and answer any questions your classmates may have. 
