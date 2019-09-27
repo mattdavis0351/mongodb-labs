@@ -1,4 +1,154 @@
+# CRUD Operations
+
+This document deals with basic create, read, update and delete operations using the mongo shell. 
+
+[Read more](https://docs.mongodb.com/manual/crud/) :book: about the CRUD operations here. 
+
+## Create Operations
+
+A MongoDB database is made up of 1 or more collections which are in turn made up of 1 or more documents. A document has a `key: value` structure, similar to JSON objects. In the following exercises, we'll learn how to insert documents using the following operations:
+* `insertOne()`
+* `insertMany()` 
+
+**Exercise 1** :computer: 
+
+* Verify what database you are currently using (should be `test`, this is the default.)
+
+    ```javascript
+    db
+    ```
+
+* Let's create a new database called `employee`. 
+    ```javascript
+    use employee_db
+    ```
+
+:arrow_right: Note that `use` creates a new database, if one does not already exist. 
+
+* Next, let's create a collection called `employee_info`.
+
+    ```javascript
+    db.createCollection("employee_info")
+    ```
+    
+* Let's confirm that the collection was successfully created.
+
+    ```javascript
+    show collections
+    ```
+:arrow_right: Similarly, you can also use `show dbs` to obtain a list of the all the databases. 
+
+* Let's try to insert the following `key:value` pairs as a document in our collection. 
+
+    {
+        "fname": "john",
+        "lname": "doe",
+        "salary": 70000,
+        "departments": ["sales", "admin"],
+        "hiredate": "2018-08-29"
+      }
+
+    **query:**
+    ```javascript
+    db.employee_info.insertOne({
+        "fname": "john", 
+        "lname": "doe", 
+        "salary": 70000, 
+        "departments": ["sales", "admin"], 
+        "hiredate": "2018-08-29"})
+    ```
+
+    **result:**
+    ```javascript
+    {
+        "acknowledged" : true,
+        "insertedId" : ObjectId("5d8e6f9ccaa4f8ddbe27296f")
+    }
+    ```
+    The response to this query is a document in itself as seen below. `"acknowldeged": true` means we the insert was successful. Also note the Object ID which is the unique identifier for this document. Every document has its own unique `_id`. It is not necessary to specify `_id` in the query in which case, MongoDB will automatically add one to the document. 
+
+**Exercise 2** :computer: 
+
+Spend **5 minutes** :alarm_clock: to try inserting the following employees' information into the `employee_info` collection:
+
+{
+  "empno": 1,
+  "fname": "charlie",
+  "lname": "rodgers",
+  "role": "manager"
+},
+{
+  "empno": 2,
+  "fname": "steve",
+  "lname": "smith",
+  "role": "team lead"
+},
+{
+  "empno": 3,
+  "fname": "sally",
+  "lname": "jones",
+  "role": "team lead"
+},
+{
+  "empno": 4,
+  "fname": "ben",
+  "lname": "bradley",
+  "role": "manager"
+}
+
+:arrow_right: You might be wondering whether the insert will work, given that some of the keys (field names) are different from the document we inserted earlier. And herein lies the beauty of MongoDB!!! Unlike relational databases, the same keys (field names) do not have to be present in all documents of the collection. :clap: 
+
+How many of you inserted the documents one by one? 
+
+It's not wrong but the more efficient way of inserting multiple documents is to use `insertMany()`. Simply replace `insertOne()` in the query above with `insertMany()`. ]
+
+:arrow_right: Keep in mind that `insertMany()` takes an array as input so enlcose all your documents in `[]` as shown in the query below.
+
+**query:**
+```javascript
+db.employee_info.insertMany([
+    {
+        "empno": 1,
+        "fname": "charlie",
+        "lname": "rodgers",
+        "role": "manager" 
+    }, 
+    {
+        "empno": 2,
+        "fname": "steve",
+        "lname": "smith",
+        "role": "team lead" 
+    },
+    {
+        "empno": 3,
+        "fname": "sally",
+        "lname": "jones",
+        "role": "team lead" 
+    }, 
+    {
+        "empno": 4,
+        "fname": "ben",
+        "lname": "bradley",
+        "role": "manager" 
+    }
+])
+```
+**Exercise 3** :computer: 
+
+You've got some more interesting employees! Spend **10 minutes** :alarm_clock: converting the following table to JSON and inserting it into our `employee_info` collection.
+
+
+|name|title|interesting fact|address|
+|:---:|:---:|---|---|
+|Harry Potter|Wizard|I kicked the shit out of Voldemort!|Hogwarts castle|
+|Groot|Superhero|I can only say 3 words in this order: 'I am Groot'!|Planet X|
+|Pikachu|Electric type pokemon|Want to see my ThuderBolt and Quick Attack?!| Pallet Town|
+
+---
+
 ## Read Operations
+
+:warning: Before we dive into our read operations, make sure you can access the `movieDetails` collection. 
 
 ### Counting records
 **Exercise 4** :computer:
@@ -12,7 +162,6 @@ db.movieDetails.count()
 
 :arrow_right: `count()` returns the total of all documents, which means duplicate documents will be counted.  
 To get a count of unique values replace `count()` with `distinct()`.
-
 
 ---
 
@@ -35,8 +184,6 @@ db.movieDetails.count({"rated": "PG-13"})
 **Exercise 6** :computer:
 
 Adding another parameter using the `,` operator **AND**s the filters and returns the matching results.
-
- 
 
 **query:**
 
@@ -143,7 +290,7 @@ Driving down the hierarchy in documents can be done using the dot notation. In t
 ```javascript
 db.movieDetails.find({"imdb.rating":9.5}).pretty()
 ```
-:arrow_right: It is important to note that if the **value** of the **key** is an array, you will need to use the aggregate pipeline instead of a simple `find()` method.
+:arrow_right: It is important to note that if the **value** of the **key** is an array, you will need to use the aggregate pipeline instead of a simple `find()` method. We'll cover the aggregate pipeline in another document. 
 
 ---
 
@@ -237,7 +384,7 @@ db.movieDetails.find({"genres":["Documentary", "Family"]}).pretty()
 	"type" : "movie"
 }
 ```
-:arrow_right: Documents with the array of `genres:["Family","Documentary"]` will also not be return for the same reason.
+:arrow_right: Documents with the array of `genres:["Family","Documentary"]` will also not be returned for the same reason.
 
 **Exercise 11** :computer: 
 * any element in the array
@@ -525,7 +672,7 @@ The MongoDB query language supports 3 update operations:
 
 Let's turn our attention towards movies made in 🇮🇳 ! I bet all of you have either heard of or watched "Taare Zameen Par" but unfortunately this collection hasn't got the name right! 
 
-* Take **5 minutes** :alarm_clock: to find out what the movie `title` is in our collection! Feel free to use the internet to look up identifying information like the release year or the actor/director/writer names to use in your query filter. 
+* Spend **5 minutes** :alarm_clock: to find out what the movie `title` is in our collection! Feel free to use the internet to look up identifying information like the release year or the actor/director/writer names to use in your query filter. 
 
 * Once you have the name, let's update it to reflect the correct name "Taare Zameen Par". 
 
@@ -590,7 +737,7 @@ The result confirms that the `deleteOne()` operation was successful, at the same
 
 **Exercise 18** :computer: 
 
-Our `movieDetails` collection has a few movies from the 1800s!!! Take **5 minutes** :alarm_clock: to delete all those movies using `deleteMany()`.
+Our `movieDetails` collection has a few movies from the 1800s!!! Spend **5 minutes** :alarm_clock: to delete all those movies using `deleteMany()`.
 
 ---
 
@@ -599,29 +746,10 @@ During this time the class should split into :five: groups to complete each sect
 
 **Activity: :alarm_clock: 15 minutes** 
 
-Share with the rest of the class the kind of movies you like by writing 3 interesting queries against this database, at the same time limiting the resulting documents to fields that you find relevant. 
 
-For example, movies that were part of both the 'Action' and 'Adventure' genres! :boom: 
-
-Using commands like:
-- `show dbs`
-- `use <database>`
-- `show collections`
-
-Explore the different datasets available on your workstation.  Be creative and try to find interesting things.  
-
-Some questions to consider while exploring:
-- How is this data structured?
-- Is there anything interesing to me about this data?
-- Is the data malformed, incorrect or incomplete?
-- What are the challenges you faced while exploring this data?
 
 **Presentation: :alarm_clock: 25 minutes**
 
-Each group will prepare a small, **5 minute**, 2-3 slide presentation about the datasets.
+Each group will prepare a small, **5 minute**, 2-3 slide presentation about the dataset.
 
-Present your results from **Lab 2** and answer any questions your classmates may have.
-Be sure to include your interesting movie :clapper: queries :+1:
-
-
-
+Present your results from the **Group Activity** and answer any questions your classmates may have.
