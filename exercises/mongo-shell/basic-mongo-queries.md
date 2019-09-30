@@ -74,7 +74,7 @@ MongoDB makes this a super easy step.  From the Mongo-Shell type `db` and hit `E
     }
     ```
 The response to this query is a document in itself as seen below. `"acknowldeged": true` means we the insert was successful. Also note the Object ID which is the unique identifier for this document. Every document has its own unique `_id`. It is not necessary to specify `_id` in the query in which case, MongoDB will automatically add one to the document. 
-
+➡️ Letting Mongo take care of your `_id` field is a good idea.  Mongo will never try to assign a duplicate value to this field, sometimes we make mistakes and may try to do that.  Mongo is pretty relaxed and sometimes doesn't stop us from doing reckless things such as assigning the same `_id` to more than one Object.  If you need control over an `id` field for you document consider creating one instead of overwriting the object id.
 **Exercise 2** :computer: 
 
 Spend **5 minutes** :alarm_clock: to try inserting the following employees' information into the `employee_info` collection:
