@@ -42,7 +42,7 @@ MongoDB makes this a super easy step.  From the Mongo-Shell type `db` and hit `E
     ```
 :arrow_right: Similarly, you can also use `show dbs` to obtain a list of the all the databases. 
 
-* Let's try to insert the following `key:value` pairs as a document in our collection. 
+* Let's try to insert the following object, a set of `key:value` pairs surround by `{}`,  as a document in our collection. 
 
     ```
     {
