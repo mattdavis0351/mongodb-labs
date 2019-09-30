@@ -40,15 +40,18 @@ A MongoDB database is made up of 1 or more collections which are in turn made up
 
 * Let's try to insert the following `key:value` pairs as a document in our collection. 
 
+    ```
     {
-        "fname": "john",
+	"fname": "john",
         "lname": "doe",
         "salary": 70000,
         "departments": ["sales", "admin"],
         "hiredate": "2018-08-29"
-      }
-
+    }
+    ```
+	
     **query:**
+    
     ```javascript
     db.employee_info.insertOne({
         "fname": "john", 
@@ -59,18 +62,20 @@ A MongoDB database is made up of 1 or more collections which are in turn made up
     ```
 
     **result:**
+    
     ```javascript
     {
         "acknowledged" : true,
         "insertedId" : ObjectId("5d8e6f9ccaa4f8ddbe27296f")
     }
     ```
-    The response to this query is a document in itself as seen below. `"acknowldeged": true` means we the insert was successful. Also note the Object ID which is the unique identifier for this document. Every document has its own unique `_id`. It is not necessary to specify `_id` in the query in which case, MongoDB will automatically add one to the document. 
+The response to this query is a document in itself as seen below. `"acknowldeged": true` means we the insert was successful. Also note the Object ID which is the unique identifier for this document. Every document has its own unique `_id`. It is not necessary to specify `_id` in the query in which case, MongoDB will automatically add one to the document. 
 
 **Exercise 2** :computer: 
 
 Spend **5 minutes** :alarm_clock: to try inserting the following employees' information into the `employee_info` collection:
 
+```
 {
   "empno": 1,
   "fname": "charlie",
@@ -120,7 +125,7 @@ Spend **5 minutes** :alarm_clock: to try inserting the following employees' info
   "role": "manager",
   "departments": []
 }
-
+```
 :arrow_right: You might be wondering whether the insert will work, given that some of the keys (field names) are different from the document we inserted earlier. And herein lies the beauty of MongoDB!!! Unlike relational databases, the same keys (field names) do not have to be present in all documents of the collection. :clap: 
 
 How many of you inserted the documents one by one? 
