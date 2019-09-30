@@ -199,7 +199,7 @@ You've got some more interesting employees! Spend **10 minutes** :alarm_clock: c
 
 |name|title|interesting fact|address|
 |:---:|:---:|---|---|
-|Harry Potter|Wizard|I kicked the shit out of Voldemort!|Hogwarts castle|
+|Harry Potter|Wizard|I kicked the sh*t out of Voldemort!|Hogwarts castle|
 |Groot|Superhero|I can only say 3 words in this order: 'I am Groot'!|Planet X|
 |Pikachu|Electric type pokemon|Want to see my ThuderBolt and Quick Attack?!| Pallet Town|
 
