@@ -80,8 +80,8 @@ Spend **5 minutes** :alarm_clock: to try inserting the following employees' info
 },
 {
   "empno": 2,
-  "fname": "steve",
-  "lname": "smith",
+  "fname": "sunil",
+  "lname": "chakraborty",
   "role": "team lead",
   "departments": ["marketing", "finance"]
 },
@@ -97,7 +97,28 @@ Spend **5 minutes** :alarm_clock: to try inserting the following employees' info
   "fname": "ben",
   "lname": "bradley",
   "role": "manager",
-  "departments": ["finance"]
+  "departments": ["legal"]
+},
+{
+  "empno": 5,
+  "fname": "radha",
+  "lname": "desai",
+  "role": "worker",
+  "departments": []
+},
+{
+  "empno": 6,
+  "fname": "shruti",
+  "lname": "patel",
+  "role": "worker",
+  "departments": []
+},
+{
+  "empno": 7,
+  "fname": "mahesh",
+  "lname": "iyer",
+  "role": "manager",
+  "departments": []
 }
 
 :arrow_right: You might be wondering whether the insert will work, given that some of the keys (field names) are different from the document we inserted earlier. And herein lies the beauty of MongoDB!!! Unlike relational databases, the same keys (field names) do not have to be present in all documents of the collection. :clap: 
@@ -112,17 +133,17 @@ It's not wrong but the more efficient way of inserting multiple documents is to 
 ```javascript
 db.employee_info.insertMany([
 	{
-   		"empno": 1,
+  		"empno": 1,
   		"fname": "charlie",
   		"lname": "rodgers",
   		"role": "manager",
-  		"departments": ["sales", "marketing", "legal"]
+  		"departments": ["sales", "marketing"]
 	},
 	{
  		"empno": 2,
-  		"fname": "steve",
-  		"lname": "smith",
-  		"role": "team lead",
+  		"fname": "sunil",
+  		"lname": "chakraborty",
+ 	 	"role": "team lead",
   		"departments": ["marketing", "finance"]
 	},
 	{
@@ -137,7 +158,28 @@ db.employee_info.insertMany([
   		"fname": "ben",
   		"lname": "bradley",
   		"role": "manager",
-  		"departments": ["finance"]
+  		"departments": ["legal"]
+	},
+	{
+  		"empno": 5,
+  		"fname": "radha",
+  		"lname": "desai",
+  		"role": "worker",
+  		"departments": []
+	},
+	{
+  		"empno": 6,
+  		"fname": "shruti",
+  		"lname": "patel",
+  		"role": "worker",
+  		"departments": []
+	},
+	{
+  		"empno": 7,
+  		"fname": "mahesh",
+  		"lname": "iyer",
+  		"role": "manager",
+  		"departments": []
 	}
 ])
 ```
