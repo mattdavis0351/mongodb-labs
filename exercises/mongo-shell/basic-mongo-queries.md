@@ -134,7 +134,7 @@ Spend **5 minutes** :alarm_clock: to try inserting the following employees' info
 
 :bulb: How many of you inserted the documents one by one? 
 
-It's not wrong but the more efficient way of inserting multiple documents is to use `insertMany()`. Simply replace `insertOne()` in the query above with `insertMany()`. ]
+It's not wrong but the more efficient way of inserting multiple documents is to use `insertMany()`. Simply replace `insertOne()` in the query above with `insertMany()`.
 
 :arrow_right: Keep in mind that `insertMany()` takes an array as input so enlcose all your documents in `[]` as shown in the query below.
 
