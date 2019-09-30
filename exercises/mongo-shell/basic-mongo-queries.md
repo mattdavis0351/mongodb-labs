@@ -7,7 +7,8 @@ This document deals with basic **Create**, **Read**, **Update** and **Delete** o
 
 ## Create Operations
 
-A MongoDB database is made up of 1 or more collections which are in turn made up of 1 or more documents. A document has a `key: value` structure, similar to JSON objects. In the following exercises, we'll learn how to insert documents using the following operations:
+A MongoDB database is made up of 1 or more collections which are in turn made up of 1 or more documents. A document has a `key: value` structure, similar to JSON objects. In the following exercises, we'll learn how to insert documents using the following methods:
+
 * `insertOne()`
 * `insertMany()` 
 
