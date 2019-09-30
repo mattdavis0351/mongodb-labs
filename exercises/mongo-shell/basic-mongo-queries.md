@@ -75,25 +75,29 @@ Spend **5 minutes** :alarm_clock: to try inserting the following employees' info
   "empno": 1,
   "fname": "charlie",
   "lname": "rodgers",
-  "role": "manager"
+  "role": "manager",
+  "departments": ["sales", "marketing"]
 },
 {
   "empno": 2,
   "fname": "steve",
   "lname": "smith",
-  "role": "team lead"
+  "role": "team lead",
+  "departments": ["marketing", "finance"]
 },
 {
   "empno": 3,
   "fname": "sally",
   "lname": "jones",
-  "role": "team lead"
+  "role": "team lead",
+  "departments": ["hr", "admin"]
 },
 {
   "empno": 4,
   "fname": "ben",
   "lname": "bradley",
-  "role": "manager"
+  "role": "manager",
+  "departments": ["finance"]
 }
 
 :arrow_right: You might be wondering whether the insert will work, given that some of the keys (field names) are different from the document we inserted earlier. And herein lies the beauty of MongoDB!!! Unlike relational databases, the same keys (field names) do not have to be present in all documents of the collection. :clap: 
@@ -107,30 +111,34 @@ It's not wrong but the more efficient way of inserting multiple documents is to 
 **query:**
 ```javascript
 db.employee_info.insertMany([
-    {
-        "empno": 1,
-        "fname": "charlie",
-        "lname": "rodgers",
-        "role": "manager" 
-    }, 
-    {
-        "empno": 2,
-        "fname": "steve",
-        "lname": "smith",
-        "role": "team lead" 
-    },
-    {
-        "empno": 3,
-        "fname": "sally",
-        "lname": "jones",
-        "role": "team lead" 
-    }, 
-    {
-        "empno": 4,
-        "fname": "ben",
-        "lname": "bradley",
-        "role": "manager" 
-    }
+	{
+   		"empno": 1,
+  		"fname": "charlie",
+  		"lname": "rodgers",
+  		"role": "manager",
+  		"departments": ["sales", "marketing", "legal"]
+	},
+	{
+ 		"empno": 2,
+  		"fname": "steve",
+  		"lname": "smith",
+  		"role": "team lead",
+  		"departments": ["marketing", "finance"]
+	},
+	{
+  		"empno": 3,
+  		"fname": "sally",
+  		"lname": "jones",
+  		"role": "team lead",
+  		"departments": ["hr", "admin"]
+	},
+	{
+  		"empno": 4,
+  		"fname": "ben",
+  		"lname": "bradley",
+  		"role": "manager",
+  		"departments": ["finance"]
+	}
 ])
 ```
 **Exercise 3** :computer: 
