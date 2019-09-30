@@ -15,7 +15,9 @@ A MongoDB database is made up of 1 or more collections which are in turn made up
 **Exercise 1** :computer: 
 
 * Verify what database you are currently using (should be `test`, this is the default.)
+MongoDB makes this a super easy step.  From the Mongo-Shell type `db` and hit `Enter`, the output is the current working database.
 
+**query:**
     ```javascript
     db
     ```
