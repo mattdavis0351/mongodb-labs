@@ -132,7 +132,7 @@ Spend **5 minutes** :alarm_clock: to try inserting the following employees' info
 ```
 :arrow_right: You might be wondering whether the insert will work, given that some of the keys (field names) are different from the document we inserted earlier. And herein lies the beauty of MongoDB!!! Unlike relational databases, the same keys (field names) do not have to be present in all documents of the collection. :clap: 
 
-How many of you inserted the documents one by one? 
+:bulb: How many of you inserted the documents one by one? 
 
 It's not wrong but the more efficient way of inserting multiple documents is to use `insertMany()`. Simply replace `insertOne()` in the query above with `insertMany()`. ]
 
