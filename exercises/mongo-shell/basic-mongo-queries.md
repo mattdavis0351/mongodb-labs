@@ -1,6 +1,7 @@
 # CRUD Operations
 
-This document deals with basic create, read, update and delete operations using the mongo shell. 
+This document deals with basic **Create**, **Read**, **Update** and **Delete** operations using the mongo shell. 
+
 
 [Read more](https://docs.mongodb.com/manual/crud/) :book: about the CRUD operations here. 
 
