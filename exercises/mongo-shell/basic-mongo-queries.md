@@ -737,12 +737,10 @@ Let's turn our attention towards movies made in 🇮🇳 ! I bet all of you have
 * Once you have the name, let's update it to reflect the correct name "Taare Zameen Par". 
 
 Here's how to perform the update operation:
-```javascript
+
 db.movieDetails.updateOne(
-    {<your uniquely identifying filter as key: value pair>}, 
-    {"$set": {"title": "Taare Zameen Par"}}
-    )
-```
+{<your uniquely identifying filter as `key: value` pair>}, {"$set": {"title": "Taare Zameen Par"}}
+)
 
 **Exercise 16** :computer: 
 
