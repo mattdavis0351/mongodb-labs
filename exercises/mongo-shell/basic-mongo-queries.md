@@ -207,8 +207,7 @@ You've got some more interesting employees! Spend **10 minutes** :alarm_clock: c
 
 ## Read Operations
 
-:warning: Before we dive into our **Read** operations, make sure you can access the `movieDetails` collection.
-
+:warning: Before we dive into our **Read** operations, make sure you can access the `movieDetails` collection. Use commands like `show dbs`, `use <db name>`, `show collections` to correctly naviagte to the intended collection. 
 
 ### Counting records
 **Exercise 4** :computer:
