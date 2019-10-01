@@ -22,7 +22,7 @@ MongoDB makes this a super easy step.  From the Mongo-Shell type `db` and hit `E
     db
     ```
 
-* Let's create a new database called `employee`. 
+* Let's create a new database called `employee_db`. 
     ```javascript
     use employee_db
     ```
