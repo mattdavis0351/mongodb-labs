@@ -77,7 +77,19 @@ The response to this query is a document in itself as seen below. `"acknowldeged
 ➡️ Letting Mongo take care of your `_id` field is a good idea.  Mongo will never try to assign a duplicate value to this field, sometimes we make mistakes and may try to do that.  Mongo is pretty relaxed and sometimes doesn't stop us from doing reckless things such as assigning the same `_id` to more than one Object.  If you need control over an `id` field for you document consider creating one instead of overwriting the object id.
 **Exercise 2** :computer: 
 
-Spend **5 minutes** :alarm_clock: to try inserting the following employees' information into the `employee_info` collection:
+HR has sent over new employee information. Spend **5 minutes** :alarm_clock: to insert the new data into the `employee_info` collection. 
+
+The data is first shown in tabular format followed by JSON object format to ease you into thinking about data non-relationally. 
+
+ |empno|fname|lname|role|salary|departments|hiredate|
+ |---|---|---|---|---|---|---|
+ |1|charlie|rodgers|manager| |sales, marketing| |
+ |2|sunil|chakraborty|team lead| |marketing, finance| |
+ |3|sally|jones|team lead| |hr, admin| |
+ |4|ben|bradley|manager| |legal| |
+ |5|radha|desai|worker| | | |
+ |6|shruti|patel|worker| | | |
+ |7|mahesh|iyer|manager| | | |
 
 ```
 {
@@ -112,25 +124,22 @@ Spend **5 minutes** :alarm_clock: to try inserting the following employees' info
   "empno": 5,
   "fname": "radha",
   "lname": "desai",
-  "role": "worker",
-  "departments": []
+  "role": "worker"
 },
 {
   "empno": 6,
   "fname": "shruti",
   "lname": "patel",
-  "role": "worker",
-  "departments": []
+  "role": "worker"
 },
 {
   "empno": 7,
   "fname": "mahesh",
   "lname": "iyer",
-  "role": "manager",
-  "departments": []
+  "role": "manager"
 }
 ```
-:arrow_right: You might be wondering whether the insert will work, given that some of the keys (field names) are different from the document we inserted earlier. And herein lies the beauty of MongoDB!!! Unlike relational databases, the same keys (field names) do not have to be present in all documents of the collection. :clap: 
+:arrow_right: You might be wondering whether the insert will work, given that some of the keys (field names) are different from the document we inserted earlier and not all records have data in every field. Here lies the beauty of MongoDB!!! Unlike relational databases, the same keys (field names) do not have to be present in all documents of the collection. Also, if data isn't present in a particular field, that field simply gets omitted from a given document. :clap: 
 
 :bulb: How many of you inserted the documents one by one? 
 
@@ -173,22 +182,19 @@ db.employee_info.insertMany([
   		"empno": 5,
   		"fname": "radha",
   		"lname": "desai",
-  		"role": "worker",
-  		"departments": []
+  		"role": "worker"
 	},
 	{
   		"empno": 6,
   		"fname": "shruti",
   		"lname": "patel",
-  		"role": "worker",
-  		"departments": []
+  		"role": "worker"
 	},
 	{
   		"empno": 7,
   		"fname": "mahesh",
   		"lname": "iyer",
-  		"role": "manager",
-  		"departments": []
+  		"role": "manager"
 	}
 ])
 ```
