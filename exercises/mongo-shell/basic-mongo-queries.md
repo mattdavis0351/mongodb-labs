@@ -150,52 +150,51 @@ It's not wrong but the more efficient way of inserting multiple documents is to 
 **query:**
 ```javascript
 db.employee_info.insertMany([
-	{
-  		"empno": 1,
-  		"fname": "charlie",
-  		"lname": "rodgers",
-  		"role": "manager",
-  		"departments": ["sales", "marketing"]
-	},
-	{
- 		"empno": 2,
-  		"fname": "sunil",
-  		"lname": "chakraborty",
- 	 	"role": "team lead",
-  		"departments": ["marketing", "finance"]
-	},
-	{
-  		"empno": 3,
-  		"fname": "sally",
-  		"lname": "jones",
-  		"role": "team lead",
-  		"departments": ["hr", "admin"]
-	},
-	{
-  		"empno": 4,
-  		"fname": "ben",
-  		"lname": "bradley",
-  		"role": "manager",
-  		"departments": ["legal"]
-	},
-	{
-  		"empno": 5,
-  		"fname": "radha",
-  		"lname": "desai",
-  		"role": "worker"
-	},
-	{
-  		"empno": 6,
-  		"fname": "shruti",
-  		"lname": "patel",
-  		"role": "worker"
-	},
-	{
-  		"empno": 7,
-  		"fname": "mahesh",
-  		"lname": "iyer",
-  		"role": "manager"
-	}
+    {
+    "empno": 1, 
+    "fname": "charlie", 
+    "lname": "rodgers", 
+    "role": "manager", 
+    "departments": ["sales", "marketing"]
+    }, 
+    {
+    "empno": 2, 
+    "fname": "sunil", 
+    "lname": "chakraborty", 
+    "role": "team lead", 
+    "departments": ["marketing", "finance"]
+    }, 
+    {"empno": 3, 
+    "fname": "sally", 
+    "lname": "jones", 
+    "role": "team lead", 
+    "departments": ["hr", "admin"]
+    }, 
+    {
+    "empno": 4, 
+    "fname": "ben", 
+    "lname": "bradley", 
+    "role": "manager", 
+    "departments": ["legal"]
+    }, 
+    {
+    "empno": 5, 
+    "fname": "radha", 
+    "lname": "desai", 
+    "role": "worker"
+    }, 
+    {
+    "empno": 6, 
+    "fname": "shruti", 
+    "lname": "patel", 
+    "role": "worker"
+    }, 
+    {
+    "empno": 7, 
+    "fname": "mahesh", 
+    "lname": "iyer", 
+    "role": "manager"
+    }
 ])
 ```
 **Exercise 3** :computer: 
