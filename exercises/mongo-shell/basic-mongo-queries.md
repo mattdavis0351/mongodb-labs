@@ -61,7 +61,7 @@ Converting this table into an object, a set of `key:value` pairs surrounded by `
         "hiredate": "2018-08-29"
     }
     ```
-	
+Now that we have our JSON object, let's insert it into our collection. 
     **query:**
     
     ```javascript
