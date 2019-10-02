@@ -42,7 +42,15 @@ MongoDB makes this a super easy step.  From the Mongo-Shell type `db` and hit `E
     ```
 :arrow_right: Similarly, you can also use `show dbs` to obtain a list of the all the databases. 
 
-* Let's try to insert the following object, a set of `key:value` pairs surround by `{}`,  as a document in our collection. 
+* Let's try to insert some data into our collection. 
+
+You are used to seeing data in a tabular format due to the relational database structure. So let's start with a table as seen below and then convert it into a JSON object that can be inserted into our collection. 
+
+|fname|lname|salary|departments|hiredate|
+|---|---|---|---|---|
+|john|doe|70000|sales, admin|2018-08-29|
+
+Converting this table into an object, a set of `key:value` pairs surrounded by `{}` looks like this:
 
     ```
     {
