@@ -52,7 +52,7 @@ You are used to seeing data in a tabular format due to the relational database s
 
 Converting this table into an object, a set of `key:value` pairs surrounded by `{}` looks like this:
 
-    ```
+```javascript
     {
 	"fname": "john",
         "lname": "doe",
@@ -60,27 +60,28 @@ Converting this table into an object, a set of `key:value` pairs surrounded by `
         "departments": ["sales", "admin"],
         "hiredate": "2018-08-29"
     }
-    ```
+```
 Now that we have our JSON object, let's insert it into our collection. 
-    **query:**
     
-    ```javascript
+   **query:**
+    
+```javascript
     db.employee_info.insertOne({
         "fname": "john", 
         "lname": "doe", 
         "salary": 70000, 
         "departments": ["sales", "admin"], 
         "hiredate": "2018-08-29"})
-    ```
+```
 
-    **result:**
+   **result:**
     
-    ```javascript
+```javascript
     {
         "acknowledged" : true,
         "insertedId" : ObjectId("5d8e6f9ccaa4f8ddbe27296f")
     }
-    ```
+```
 The response to this query is a document in itself as seen below. `"acknowldeged": true` means we the insert was successful. Also note the Object ID which is the unique identifier for this document. Every document has its own unique `_id`. It is not necessary to specify `_id` in the query in which case, MongoDB will automatically add one to the document. 
 ➡️ Letting Mongo take care of your `_id` field is a good idea.  Mongo will never try to assign a duplicate value to this field, sometimes we make mistakes and may try to do that.  Mongo is pretty relaxed and sometimes doesn't stop us from doing reckless things such as assigning the same `_id` to more than one Object.  If you need control over an `id` field for you document consider creating one instead of overwriting the object id.
 **Exercise 2** :computer: 
