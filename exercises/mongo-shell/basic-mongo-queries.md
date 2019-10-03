@@ -539,7 +539,7 @@ Some questions to consider while exploring:
 **Presentation: :alarm_clock: 25 minutes**
 Each group will prepare a small, **5 minute**, 2-3 slide presentation about the datasets.
 
-Present your results from **Lab 2** and answer any questions your classmates may have.
+Present your results from the **Group Activity** and answer any questions your classmates may have.
 Be sure to include your interesting movie :clapper: queries :+1:
 
 
