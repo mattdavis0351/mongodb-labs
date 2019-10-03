@@ -1,8 +1,10 @@
 # Aggregate Functions
 
-Modeled on the data processing pipeline, aggregation is a powerful feature that allows documents to enter a pipeline, go through multiple stages and compute an aggregated result. [Read more](https://docs.mongodb.com/manual/aggregation/#aggregation-framework) :book: about the aggregation pipeline here. 
+Modeled on the data processing pipeline, aggregation is a powerful feature that allows documents to enter a pipeline, go through multiple stages and compute an aggregated result. 
 
-:arrow_right: When writing queries using the aggregate pipeline, we use the `aggregate` function as follows: 
+[Read more](https://docs.mongodb.com/manual/aggregation/#aggregation-framework) :book: about the aggregation pipeline. 
+
+:arrow_right: When writing queries using the aggregate pipeline, we use the `aggregate()` function as follows: 
 ```javascript
 db.<collection_name>.aggregate([
     {pipeline_stage_1 in the form of key: value pairs},
@@ -13,7 +15,9 @@ db.<collection_name>.aggregate([
 
 ### The "$group" operator
 
-The `$group` operator groups the documents by an identifier specified by `_id` field, and based on that distinct grouping, performs an agggregation like `$sum` and returns the resulting documents. [Read more](https://docs.mongodb.com/manual/reference/operator/aggregation/group/) :book: about it here. 
+The `$group` operator groups the documents by an identifier specified by `_id` field, and based on that distinct grouping, performs an agggregation like `$sum` and returns the resulting documents. 
+
+[Read more](https://docs.mongodb.com/manual/reference/operator/aggregation/group/) :book: about **$group**. 
 
 :warning: Before diving into the exercises, switch over to the `cricket_players` collection in the `test` database.
 
@@ -43,8 +47,9 @@ db.cricket_players.aggregate([
 - Whenever a field is accessed as the **key**, it is written as it is. We've seen numerous examples of this starting from our very first filtering query `db.movieDetails.count({"rated": "PG-13"})`. 
     - Here the field `rated` is used as a key and is simply written as `rated`.
     
-- Whenever a field is accessed as the **value**, which you'll see frequently in the aggregation pipeline queries, it is denoted with a `$` before the name. For example, in the query above, you saw `{_id: "$Batting_Hand"}`. 
-    - Here the field `Batting_Hand` is used as a value and written as `$Batting_Hand`. In this case, `$BattingHand` is acting as a variable or a placeholder for each of its distinct values ("NULL", "Left_Hand", "Right_Hand") which are then returned in the output documents. 
+- Whenever a field is accessed as the **value**, which you'll see frequently in the aggregation pipeline queries, it is denoted with a `$` before the name and must be in quotes. For example, in the query above, you saw `{_id: "$Batting_Hand"}`. 
+    - Here the field `Batting_Hand` is used as a value and written as `$Batting_Hand`. In this case, `$Batting_Hand` is acting as a variable or a placeholder for each of its distinct values ("NULL", "Left_Hand", "Right_Hand") which are then returned in the output documents. 
+- `playerCountByBattingHand` is a user-defined label, we could've named that anything we wanted.
 
 **Exercise 2** :computer: 
 
@@ -60,6 +65,8 @@ db.cricket_players.aggregate([
     }
 ])
 ```
+
+:bulb: Only 35 players have ever captained Inida's national cricket team!
 
 **Exercise 3** :computer: 
 Count the number of players of each country that bat with a given hand.
@@ -79,7 +86,9 @@ db.cricket_players.aggregate([
 
 ### The "$match" operator
 
-The `$match` operator matches input documents to a given criteria and passes those matched documents to the next stage of the pipeline. [Read more](https://docs.mongodb.com/manual/reference/operator/aggregation/match/) :book: about it here.
+The `$match` operator matches input documents to a given criteria and passes those matched documents to the next stage of the pipeline. 
+
+[Read more](https://docs.mongodb.com/manual/reference/operator/aggregation/match/) :book: about **$match**.
 
 **Exercise 4** :computer: 
 
@@ -103,7 +112,15 @@ db.cricket_players.aggregate([
 - `$match` is the first stage in this pipeline which matches only those documents where `Batting_Hand` is not equal to "NULL". 
 - These documents are then sent to the second stage of the pipeline where the `$group` operation groups the players by distinct non-null values of`Batting_Hand`.
 
+:bulb: Why might this be important when we query data?  
+
+Imagine if there was a room down the corridor that was full of colored boxes.  Then we asked you to go get all of those boxes and bring them into this room.  Now that all the boxes were in our room, we decided to tell you that we only want the blue boxes, and the rest need to stay in the other room! Now you'd have to separate the blue boxes from the rest, and make another trip to return the unwanted boxes.  Once you get back to our current room we ask you to count the number of blue boxes.
+
+By using **$match** we can say "go to the box room and find all the blue ones, bring them back to our current room, once they are all here we will count them".
+
 **Exercise 5** :computer: 
+
+Our data isn't the cleanest, you'll learn more about data cleansing in future classes, but for now, some of our players have the value of `NULL` where the country they play for should be.  Let's look at a query that will filter out those who meet this condition.
 
 Count number of players by non null country.
 
@@ -120,6 +137,8 @@ db.cricket_players.aggregate([
     }
 ])
 ```
+
+### The "$sort" operator
 
 **Exercise 6** :computer: 
 
@@ -147,7 +166,7 @@ db.cricket_players.aggregate([
 - **key** being the field by which to sort (in our case `_id`) 
 - **value** being the sort direction (1 for acending order and -1 for descending order.) 
 
-[Read more](https://docs.mongodb.com/manual/reference/operator/aggregation/sort/) :book: about it here. 
+[Read more](https://docs.mongodb.com/manual/reference/operator/aggregation/sort/) :book: about **$sort**. 
 
 ---
 
