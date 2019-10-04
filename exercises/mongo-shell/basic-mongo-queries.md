@@ -757,7 +757,6 @@ db.movieDetails.updateOne(
 
 **Exercise 16** :computer: 
 
-basic-mongo-queries-review
 MongoDB offers multiple operators that can be used in its update operations. In the exercise above, we looked at the `$set` operator. 
 
 |Name|Description|
@@ -782,7 +781,6 @@ Take **10 minutes** :alarm_clock: to go through this list and write an interesti
 
 Present your results from the **Group Activity** and answer any questions your classmates may have.
 Be sure to include your interesting movie :clapper: queries :+1:
-master
 
 ## Delete Operations
 
