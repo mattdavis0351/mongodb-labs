@@ -6,19 +6,21 @@ In this document, we're going to look at running Mongo queries with Python. The 
 
 Before we dive into the queries, let's install the `pymongo` package which is a native Python driver for MongoDB. 
 
-- Right click on the windows button(bottom left corner) on your desktop.
-- In the menu that appears, select the non-admin Command Prompt.
-- Once Command Prompt is open, type `pip install pymongo` and hit 'Enter'.
-    - `pip` is the package installer for python
-- Once successful, you can close the Command Prompt. 
-- And onto :snake: we go!
+- Left click on the windows button(bottom left corner) on your desktop.
+- Type the word `Anaconda` and you should see the `Anaconda Prompt` application appear in the search results.
+- Right click on `Anaconda Prompt` and select `Run As Administrator` and enjoy your cosmic powers.
+- We now need to use `pip` to install two packages:
+  - Type `pip install msgpack`, this package is required for `pymongo` to install correctly.  Once that operation completes move to the next one.
+  - Type `pip install pymongo` and wait for this operation to complete.
+- Once successful, you can close the `Anaconda Prompt`. 
+- And onto :snake: we go!  Open **Spider** and get ready to code!
 
 ---
 
 ### Importing the package
 
-- Open the code editor of your choice. 
-- Create a new file and name it whatever you want. Make sure to use the extension `.py` when saving it. I'm going to call my file `mongo_with_python.py`. Real imaginative, I know! :stuck_out_tongue: 
+- Using **Spider** complete the following exercises. 
+- **Optional:** Create a new file and name it whatever you want. Make sure to use the extension `.py` when saving it. I'm going to call my file `mongo_with_python.py`. Real imaginative, I know! :stuck_out_tongue: 
 - Now that we have our python file, let's get started with the first line of Python code which will be to let the program know what packages we're going to reference. More specifically, we're going to be referencing the `MongoClient` class from within the `pymongo` package. 
 
 **code:**
