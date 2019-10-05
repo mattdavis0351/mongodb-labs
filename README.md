@@ -19,13 +19,13 @@ Becuase of that, we've put together a series of documents designed to get you pr
 
 ### Mongo Query Language
 
-- [CRUD](01_basic-mongo-queries.md):  Basic **Create**, **Read**, **Update** and **Delete** operations with a focus on getting you accostomed to a new style of writing queries.
-- [Intermediate Querying](02_intermediate-mongo-queries.md):  Exercises that will walk you though more advanced use cases for **Read** operations.
-- [Advanced Querying](03_advanced-mongo-queries.md):  This collection of exercises builds on the previous two and really readies you to leverage the aggregate pipeline when making MongoDB queries.  Learn to harness the flexibility and power behind this unique database.
+- [CRUD](exercises/01_basic-mongo-queries.md):  Basic **Create**, **Read**, **Update** and **Delete** operations with a focus on getting you accostomed to a new style of writing queries.
+- [Intermediate Querying](exercises/02_intermediate-mongo-queries.md):  Exercises that will walk you though more advanced use cases for **Read** operations.
+- [Advanced Querying](exercises/03_advanced-mongo-queries.md):  This collection of exercises builds on the previous two and really readies you to leverage the aggregate pipeline when making MongoDB queries.  Learn to harness the flexibility and power behind this unique database.
 
 ### Using MongoDB and Python3 With PyMongo
 
-- [PyMongo](04_mongo-with-python.md):  Learn the recommended way to work with MongoDB and Python.  These exercises show you how to convert the Mongo Query Language into easy to use Python code.
+- [PyMongo](exercises/04_mongo-with-python.md):  Learn the recommended way to work with MongoDB and Python.  These exercises show you how to convert the Mongo Query Language into easy to use Python code.
 
 ---
 
