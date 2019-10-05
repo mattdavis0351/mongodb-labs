@@ -22,7 +22,7 @@ Steps:
   - `index.html`
   - `mongoinsert.html`
   - `query.html`
-4. Copy and paste the following code into it's respective files:
+4. Copy and paste the following code into its respective files:
 
       **docs.html**
       ```html
@@ -124,14 +124,14 @@ At the top of your `app.py` file place the following statments:
 from flask import Flask, request, jsonify, render_template
 import pymongo
 ```
-Next, we need to create our initial Flask instance and set it's `DEBUG` features to give us helpful information in the event that things go wrong:
+Next, we need to create our initial Flask instance and set its `DEBUG` features to give us helpful information in the event that things go wrong:
 ```python
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
 ```
 
-:bulb: If you are using a single module (as in this example), you should use `__name__` because depending on if it’s started as application or imported as module the name will be different (`__main__` versus the actual import name).
+:bulb: If you are using a single module (as in this example), you should use `__name__` because depending on if it’s started as an application or imported as a module, the name will be different (`__main__` versus the actual import name).
 
 Lastly, let's check to see if we can start our `Flask` application.  We are going to tell our app to run and add a `PORT` for our applicaiton to listen on:
 **app.py**
@@ -158,7 +158,7 @@ Press `Ctrl+C` to stop the stop the server and head back to your **app.py** file
 
 ## API Endpoints
 
-`Endpoints`, also known as `Routes`, are locations on our server thatn have content which is meant to be accessed.  Access to this content can take place through a web browser such as *Google Chrome** or **Safari**, programatcially by processing `HTTP` requests or using a utility like `POSTMAN` to query the resources.
+`Endpoints`, also known as `Routes`, are locations on our server that have content which is meant to be accessed.  Access to this content can take place through a web browser such as **Google Chrome** or **Safari**, programatcially by processing `HTTP` requests or using a utility like `POSTMAN` to query the resources.
 We navigate to endpoints on a regular basis as we use the internet.  You're doing so currently as you view this file.  We can view the specific `Endpoint` or `Route` our currently access resource is at by examining the URL in the address bar of our browser.
 Consider what happens when you visit [Facebook](https://www.facebook.com), you type `www.facebook.com` into your browser and this usually takes you to the `root` endpoint which is denoted with a `/` character.
 
@@ -201,12 +201,11 @@ app.config["DEBUG"] = True
 def home_page():
     return "Congrats!  You made it to the home page!"
 
-
-
 app.run(port=35080)
 ```
+:arrow_right: Note that the code we just added was between the DEBUG feature and the PORT specification.
 
-**Save app.py and use Python to run it.  Once the server is running navigate to `http://localhost:35080/` in your web browser, or you `POSTMAN` to send a `GET` request to that URL**
+**Save app.py and use Python to run it.  Once the server is running, navigate to `http://localhost:35080/` in your web browser, or use `POSTMAN` to send a `GET` request to that URL**
 
 **Expected Output**
 ![image](https://user-images.githubusercontent.com/38021615/66260455-bd9dc700-e773-11e9-8db9-5bc4d0911aa1.png)
@@ -216,7 +215,7 @@ Okay, admittedly that wasn't the most useful API endpoint ever :man_shrugging:. 
 
 Instead of returning the `string` explicitly, when we return a file we can make real-time changes to that file without the need to restart the `Flask` server.
 
-:bulb:  What are some scenarios that youc an think of where server downtime can cause issues?  What are some negatives of real-time updates of static assets?
+:bulb:  What are some scenarios that you can think of where server downtime can cause issues?  What are some negatives of real-time updates of static assets?
 
 Inside of **app.py** make the following changes.  We will show you the complete code snippet all at once this time.
 
@@ -245,13 +244,15 @@ Save your **app.py** file and run it using Python.  Once the server is running n
 **Web Browser View**
 ![image](https://user-images.githubusercontent.com/38021615/66260577-191c8480-e775-11e9-888c-5634141a0bc6.png)
 
+:warning: The link on this page won't work yet since we haven't configured it to be an endpoint. We will do so soon so wait for it!
+
 **Bonus :rocket:** : Try making a change to the `index.html` page by adding a different welcome message (**Do Not Edit The Link On This Page**) and refresh your broswer without restarting the server to see the new content load.
 
 
 **Exercise 3:**
 Our `Endpoints` aren't limited to just sending content in an HTTP Response Body.  They can also do computational stuff.  Let's take an admittedly arbitrary look at an `Endpoint` which contains computational logic when it receives HTTP Requests.
 
-We are also going to add a two new route to our **app.py** file at the same time.  Open **app.py** and add the following route, again we will show you the complete file all at once.  We will make the following changes:
+We are also going to add two new routes to our **app.py** file at the same time.  Open **app.py** and add the following routes, again we will show you the complete file all at once.  We will make the following changes:
 - Add two global variables `var1` and `var2` which are `integers`
 - Add two new routes, one that points to `/addition` and the other pointing to `/multiplication`.  Each will contain different but relevant logic.
 
@@ -282,7 +283,7 @@ def multiply_stuff():
 app.run(port=35080)
 ```
 
-Save your **app.py** file and run it with Python.  Once the server is running navigate to our two new routes and watch the :sparkle: happen.
+Save your **app.py** file and run it with Python.  Once the server is running navigate to your two new routes and watch the :sparkles: happen.
 
 In the above example we demonstrated the use of returning a `string` using `str()` as well as `JSON` using `jsonify()`.
 
