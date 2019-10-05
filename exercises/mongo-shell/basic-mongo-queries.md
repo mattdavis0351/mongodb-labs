@@ -772,15 +772,11 @@ MongoDB offers multiple operators that can be used in its update operations. In 
 |`$rename`|Renames a field|
 
 
-Take **10 minutes** :alarm_clock: to go through this list and write an interesting `$updateMany()` query. 
-
+Take **10 minutes** :alarm_clock: to go through this list and write an interesting `$updateMany()` query against the `employee_info` collection we created earlier. 
 
 :arrow_right: Note that `updateMany()` will make the same modification to all the documents that match the given filter. 
 
 ---
-
-Present your results from the **Group Activity** and answer any questions your classmates may have.
-Be sure to include your interesting movie :clapper: queries :+1:
 
 ## Delete Operations
 
@@ -811,7 +807,11 @@ The result confirms that the `deleteOne()` operation was successful, at the same
 
 **Exercise 18** :computer: 
 
-Our `movieDetails` collection has a few movies from the 1800s!!! Spend **5 minutes** :alarm_clock: to delete all those movies using `deleteMany()`.
+Switch back to the `employee_info` collection and delete one of the managers. 
+
+:warning: In situations like these, when the filter criteria matches more than 1 document, make note that the first document to be returned is the first document to be deleted. This is an unintended consequence of such an operation so tread with caution.
+
+On the other hand, how about we perform a `deleteMany()` operation against all the managers. No more managers at work! :dancer:
 
 ---
 
