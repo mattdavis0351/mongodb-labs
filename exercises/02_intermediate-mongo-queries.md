@@ -144,7 +144,7 @@ db.movieDetails.find({"$or": [
 
 ### The "$and" operator
 
-As you [already know](../blob/master/exercises/mongo-shell/basic-crud/basic-read.md#Filtering-on-multiple-fields), MongoDB implicitly **AND**s the filters when separated by `,` in the query. 
+As you [already know](../exercises/01_basic-mongo-queries.md#Filtering-on-multiple-fields), MongoDB implicitly **AND**s the filters when separated by `,` in the query. 
 
 **Exercise 2** :computer: 
 
