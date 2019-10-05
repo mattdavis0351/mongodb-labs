@@ -2,7 +2,7 @@
 
 ## Components
 
-- **Flask:** is the most popular Python web application framework.  This is the Python library that is going to power our endpoints when we make a http request.
+- **Flask:** is the most popular Python web application framework.  This is the Python library that is going to power our endpoints when we make a http request. :book: [Read More](http://flask.palletsprojects.com/en/1.1.x/) about Flask.
 - **templates:** this is going to be a folder in our project that will house our `html` files.  These files will be rendered by `Flask` when a particular endpoint is navigated to in your web browser.
 
 :warning: This is not a comprehensive discussion about `Flask` or `HTML`, rather it is a series of exercises to get you familiar with web services and how you may interact with them.
@@ -138,6 +138,18 @@ Lastly, let's check to see if we can start our `Flask` application.  We are goin
 ```python
 app.run(port=35080)
 ```
+
+**Complete View of app.py**
+```python
+from flask import Flask, request, jsonify, render_template
+import pymongo
+
+app = Flask(__name__)
+app.config["DEBUG"] = True
+
+app.run(port=35080)
+```
+
 Using Python run **app.py** and observe the terminal.  You should see output similar to that below, indicating that flask is running on `localhost:35080`
 
 ![image](https://user-images.githubusercontent.com/38021615/66258917-ad7bec80-e75f-11e9-8ec1-a5ebc2c165c6.png)
@@ -152,3 +164,126 @@ Consider what happens when you visit [Facebook](https://www.facebook.com), you t
 
 What if I want to **create a page** for a Band using Facebook?  Kindly Facebook provides us an `Endpoint` to reach the resources necessary to do so:
 [create a page](https://www.facebook.com/pages/creation/?ref_type=registration_form) uses the `Endpoint` of `/pages/creation`.  This means we started at the root, `/`, then from there we found a location called `pages/` which is some sort of directory, and within it we found `creation` which could be a static file or some kind of functionality that Facebook provides.
+
+## Creating Endpoints
+
+**Exercise 1:**
+Let's walk through building a few simple endpoints so that we can see how that works with `Flask` prior to our MongoDB integration.
+
+We will start with the `root` route since that is the essentially where any user will land when they visit our URL.
+
+In your **app.py** file add the following code:
+
+```python
+
+@app.route("/", methods=["GET"])
+def home_page():
+    return "Congrats!  You made it to the home page!"
+    
+```
+
+You can :book:[Read More](http://flask.palletsprojects.com/en/1.1.x/quickstart/#routing) about `Flask` routing for a full explaination about what is happening in the above code block.
+
+The quick version is that we created a route using the `app.route()` method.  As we created that route we passed in two arguments.  The first argument is the name of the route as a `string` and the second is the [HTTP Request Method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) that will trigger the code block below it, in our case the `home_page()` function.
+
+We simply return some text in the [HTTP Response Body](https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages#Body_2)
+
+**Complete View of app.py**
+```python
+from flask import Flask, request, jsonify, render_template
+import pymongo
+
+app = Flask(__name__)
+app.config["DEBUG"] = True
+
+
+@app.route("/", methods=["GET"])
+def home_page():
+    return "Congrats!  You made it to the home page!"
+
+
+
+app.run(port=35080)
+```
+
+**Save app.py and use Python to run it.  Once the server is running navigate to `http://localhost:35080/` in your web browser, or you `POSTMAN` to send a `GET` request to that URL**
+
+**Expected Output**
+![image](https://user-images.githubusercontent.com/38021615/66260455-bd9dc700-e773-11e9-8db9-5bc4d0911aa1.png)
+
+**Exercise 2:**
+Okay, admittedly that wasn't the most useful API endpoint ever :man_shrugging:.  So let's see how we can use this same logic to render a static file, such as `index.html`.  
+
+Instead of returning the `string` explicitly, when we return a file we can make real-time changes to that file without the need to restart the `Flask` server.
+
+:bulb:  What are some scenarios that youc an think of where server downtime can cause issues?  What are some negatives of real-time updates of static assets?
+
+Inside of **app.py** make the following changes.  We will show you the complete code snippet all at once this time.
+
+```python
+from flask import Flask, request, jsonify, render_template
+import pymongo
+
+app = Flask(__name__)
+app.config["DEBUG"] = True
+
+
+@app.route("/", methods=["GET"])
+def home_page():
+    return render_template('index.html')
+
+app.run(port=35080)
+```
+
+You can see the `Flask` method `render_template()` is used to send our `index.html` file in the HTTP Response Body this time.
+
+Save your **app.py** file and run it using Python.  Once the server is running navigate to the endpoint, `localhost:35080/`, to see the changes to the endpoint.
+
+**POSTMAN View**
+![image](https://user-images.githubusercontent.com/38021615/66260568-fab68900-e774-11e9-957b-b4326fcdbb1e.png)
+
+**Web Browser View**
+![image](https://user-images.githubusercontent.com/38021615/66260577-191c8480-e775-11e9-888c-5634141a0bc6.png)
+
+**Bonus :rocket:** : Try making a change to the `index.html` page by adding a different welcome message (**Do Not Edit The Link On This Page**) and refresh your broswer without restarting the server to see the new content load.
+
+
+**Exercise 3:**
+Our `Endpoints` aren't limited to just sending content in an HTTP Response Body.  They can also do computational stuff.  Let's take an admittedly arbitrary look at an `Endpoint` which contains computational logic when it receives HTTP Requests.
+
+We are also going to add a two new route to our **app.py** file at the same time.  Open **app.py** and add the following route, again we will show you the complete file all at once.  We will make the following changes:
+- Add two global variables `var1` and `var2` which are `integers`
+- Add two new routes, one that points to `/addition` and the other pointing to `/multiplication`.  Each will contain different but relevant logic.
+
+```python
+from flask import Flask, request, jsonify, render_template
+import pymongo
+
+app = Flask(__name__)
+app.config["DEBUG"] = True
+
+var1 = 34
+var2 = 91
+
+@app.route("/", methods=["GET"])
+def home_page():
+    return render_template('index.html')
+
+@app.route("/addition", methods=["GET"])
+def add_stuff():
+    sum = var1 + var2
+    return str(sum)
+
+@app.route("/multiplication", methods=["GET"])
+def multiply_stuff():
+    product = var1 * var2
+    return jsonify(product)
+    
+app.run(port=35080)
+```
+
+Save your **app.py** file and run it with Python.  Once the server is running navigate to our two new routes and watch the :sparkle: happen.
+
+In the above example we demonstrated the use of returning a `string` using `str()` as well as `JSON` using `jsonify()`.
+
+:book: [Read More](http://flask.palletsprojects.com/en/1.1.x/quickstart/#apis-with-json) about using JSON with API's.
