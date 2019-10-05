@@ -13,7 +13,7 @@ Becuase of that, we've put together a series of documents designed to get you pr
 
 ## Let's Get Started
 
-### Getting Your Data Into Mongo
+### Getting Your Data Into MongoDB
 
 - [Importing Data]():  Learn how to import existing `.JSON` and `.CSV` files into MongoDB using the `mongoimport` command line utility.
 
