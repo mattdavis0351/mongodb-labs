@@ -15,7 +15,7 @@ Becuase of that, we've put together a series of documents designed to get you pr
 
 ### Getting Your Data Into MongoDB
 
-- [Importing Data](00_importing-data-into-mongo.md):  Learn how to import existing `.JSON` and `.CSV` files into MongoDB using the `mongoimport` command line utility.
+- [Importing Data](exercises/00_importing-data-into-mongo.md):  Learn how to import existing `.JSON` and `.CSV` files into MongoDB using the `mongoimport` command line utility.
 
 ### Mongo Query Language
 
