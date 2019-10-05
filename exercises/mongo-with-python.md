@@ -9,9 +9,10 @@ Before we dive into the queries, let's install the `pymongo` package which is a 
 - Left click on the windows button(bottom left corner) on your desktop.
 - Type the word `Anaconda` and you should see the `Anaconda Prompt` application appear in the search results.
 - Right click on `Anaconda Prompt` and select `Run As Administrator` and enjoy your cosmic powers.
-- We now need to use `pip` to install two packages:
+- We now need to use `pip` to install three packages:
   - Type `pip install msgpack`, this package is required for `pymongo` to install correctly.  Once that operation completes move to the next one.
-  - Type `pip install pymongo` and wait for this operation to complete.
+  - Type `pip install pymongo` and wait for this operation to complete. Once this operation completes, move on to the last one.
+  - Type `pip install collections` and wait for this operation to complete.
 - Once successful, you can close the `Anaconda Prompt`. 
 - And onto :snake: we go!  Open **Spider** and get ready to code!
 
@@ -206,25 +207,41 @@ for doc in db.titanic.find(
 
 Last but definitely not the least, we talk about the aggregation pipeline. You already have an idea of the multiple stages in the pipeline and how results from one stage are passed onto the next. 
 
-Here, let's see how the magic is done in :snake: !
+Here, let's see how the magic happens in :snake: !
 
 
 **Exercise 8** :computer: 
 
-So far, we've talked of :baby:, :man:, :woman: and :family: so most definitely the :older_man: and :older_woman: are feeling a little left out! So let's invite them to the query party! 
+So far, we've talked of :baby:, :man:, :woman: and :family: which is why the :older_man: and :older_woman: are feeling a little left out! Let's invite them to the query party! 
+
+Analyze the`class` and `gender` of people aged 70 and above through an aggregation pipeline.
 
 ```python
-print(db.titanic.count_documents({"age":{"$gte":70}}))
-
 from collections import OrderedDict
-cursor = db.titanic.aggregate([ \
-    {"$match":{"age":{"$gte":70}}}, \
-    {"$project":{"class":1, "gender":1, "survived":1}}, \
-    {"$sort":OrderedDict([("class", 1), ("gender", 1)])}, \
-    {"$limit":5}])
-for doc in cursor:
+var = db.titanic.aggregate([
+    {"$match":{"age":{"$gte":70}}},
+    {"$project":{"class":1, "gender":1, "survived":1}},
+    {"$sort":OrderedDict([("class", 1), ("gender", 1)])},
+    ])
+for doc in var:
     print(doc["class"], doc["gender"], doc["survived"])
 ```
 
+:arrow_right: Note that in this case, `$sort` is part of a key: value pair, unlike earlier. And in the Python world, key: value pairs are equivalent to a dictionary. Python dictionaries do **not** maintain their order hence to preserve the sort order, we import a class called `OrderedDict` from the `collections` package and use it on our `$sort` array.
+
 ---
 ### Group Activities
+
+During this time the class should split into :five: groups to complete each section.
+
+**Activity: :alarm_clock: 15 minutes**
+
+Explore a MongoDB collection of your choice and put your :snake: skills to use! Come up with interesting queries. 
+
+And if you want to go above and beyond, check out **list comprehensions** in Python and try converting your loops into super geeky one liners! 
+
+**Presentation: :alarm_clock: 25 minutes**
+
+Each group will prepare a small, 5 minute, 2-3 slide presentation about their queries and output.
+
+Present your results from the **Group Activity** and answer any questions your classmates may have.
