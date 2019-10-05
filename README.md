@@ -25,3 +25,7 @@ Becuase of that, we've put together a series of documents designed to get you pr
 ### Using MongoDB and Python3 With PyMongo
 
 - [PyMongo]():  Learn the recommended way to work with MongoDB and Python.  These exercises show you how to convert the Mongo Query Language into easy to use Python code.
+
+
+## Can't Get Enough?
+If you can't get enough MongoDB consider enrolling in [free training](https://university.mongodb.com/) provided through the MongoDB University!
