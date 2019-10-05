@@ -1,4 +1,4 @@
-# Aggregate Functions
+# Advanced Queries
 
 Modeled on the data processing pipeline, aggregation is a powerful feature that allows documents to enter a pipeline, go through multiple stages and compute an aggregated result. 
 
