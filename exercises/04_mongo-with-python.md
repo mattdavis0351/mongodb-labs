@@ -1,3 +1,4 @@
+![image](https://user-images.githubusercontent.com/38021615/66251170-fb620780-e701-11e9-9d80-cb36e88a935b.png)
 ## MongoDB using PyMongo
 
 In this document, we're going to look at running Mongo queries with Python. The advantage of this kind of querying is that we don't have to leave the Python environment in favor of the Mongo shell and can fire all our queries pythonically. 
