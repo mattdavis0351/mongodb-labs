@@ -154,7 +154,7 @@ Using Python run **app.py** and observe the terminal.  You should see output sim
 
 ![image](https://user-images.githubusercontent.com/38021615/66258917-ad7bec80-e75f-11e9-8ec1-a5ebc2c165c6.png)
 
-Press `Ctrl+C` to stop the stop the server and head back to your **app.py** file to start building endpoints.
+Press `Ctrl+C` to stop the server and head back to your **app.py** file to start building endpoints.
 
 ## API Endpoints
 
