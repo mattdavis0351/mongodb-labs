@@ -13,13 +13,13 @@ Before we dive into the queries, let's install the `pymongo` package which is a 
   - Type `pip install msgpack`, this package is required for `pymongo` to install correctly.  Once that operation completes move to the next one.
   - Type `pip install pymongo` and wait for this operation to complete. 
 - Once successful, you can close the `Anaconda Prompt`. 
-- And onto :snake: we go!  Open **Spider** and get ready to code!
+- And onto :snake: we go!  Open **Spyder** and get ready to code!
 
 ---
 
 ### Importing the package
 
-- Using **Spider** complete the following exercises. 
+- Using **Spyder** complete the following exercises. 
 - **Optional:** Create a new file and name it whatever you want. Make sure to use the extension `.py` when saving it. I'm going to call my file `mongo_with_python.py`. Real imaginative, I know! :stuck_out_tongue: 
 - Now that we have our python file, let's get started with the first line of Python code which will be to let the program know what packages we're going to reference. More specifically, we're going to be referencing the `MongoClient` class from within the `pymongo` package. 
 
