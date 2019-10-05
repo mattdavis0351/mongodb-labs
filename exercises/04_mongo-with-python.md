@@ -9,10 +9,9 @@ Before we dive into the queries, let's install the `pymongo` package which is a 
 - Left click on the windows button(bottom left corner) on your desktop.
 - Type the word `Anaconda` and you should see the `Anaconda Prompt` application appear in the search results.
 - Right click on `Anaconda Prompt` and select `Run As Administrator` and enjoy your cosmic powers.
-- We now need to use `pip` to install three packages:
+- We now need to use `pip` to install two packages:
   - Type `pip install msgpack`, this package is required for `pymongo` to install correctly.  Once that operation completes move to the next one.
-  - Type `pip install pymongo` and wait for this operation to complete. Once this operation completes, move on to the last one.
-  - Type `pip install collections` and wait for this operation to complete.
+  - Type `pip install pymongo` and wait for this operation to complete. 
 - Once successful, you can close the `Anaconda Prompt`. 
 - And onto :snake: we go!  Open **Spider** and get ready to code!
 
