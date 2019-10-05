@@ -19,7 +19,7 @@ We're going to import a variety of file types into MongoDB using the `mongoimpor
 ### JSON
 
 JSON data comprises multiple JSON objects. Here's an example of what it looks like:
-```
+```JSON
 {
     "city": "Chennai",
     "state": "Tamil Nadu",
@@ -58,7 +58,7 @@ In the query above, the following options have been used:
 
 A JSON array is when multiple JSON objects are enclosed between a single array`[]` as follows:
 
-```
+```JSON
 [
     {
         "city": "Chennai",
