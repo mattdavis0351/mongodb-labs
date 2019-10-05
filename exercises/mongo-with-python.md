@@ -238,7 +238,9 @@ During this time the class should split into :five: groups to complete each sect
 
 Explore a MongoDB collection of your choice and put your :snake: skills to use! Come up with interesting queries. 
 
-And if you want to go above and beyond, check out **list comprehensions** in Python and try converting your loops into super geeky one liners! 
+And if you want to go above and beyond:
+- check out list comprehensions in Python and try converting your loops into super geeky one liners! 
+- bring your data to life by visualizing your results with a Python visualization library like `matplotlib`!
 
 **Presentation: :alarm_clock: 25 minutes**
 
