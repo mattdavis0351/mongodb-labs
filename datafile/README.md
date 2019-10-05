@@ -78,7 +78,7 @@ A JSON array is when multiple JSON objects are enclosed between a single array`[
 ]
 ```
 
-**query:**
+**Importing a JSON Array:**
 ```javascript
 mongoimport --db <my_db_name> --collection <my_collection_name> --file <my_file_name.json> --jsonArray
 ```
@@ -91,7 +91,7 @@ The syntax for importing JSON arrays is similar to importing JSON objects with t
 
 **C**omma **S**eparated **V**alue files are flat files that store tabular data as plain text. Most commonly, each data point is separated by commas, which is where it gets its name. Other delimiters like semicolons can also be used. 
 
-**query:**
+**Importing CSV Files:**
 ```javascript
 mongoimport --db <my_db_name> --collection <my_collection_name> --file <my_file_name.csv> --type csv --headerline
 ```
