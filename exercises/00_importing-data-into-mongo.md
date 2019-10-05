@@ -1,5 +1,22 @@
 # Importing data into MongoDB
 
+## Your Datasets
+
+To make life easy on you, we have built a table to show you the different kinds of data you have available to you.  Use the appropriate method for each dataset when importing.
+
+|File Name|File Type|
+|---|---|
+|Titanic.json|Regular JSON File|
+|movieDetails.json|Regular JSON File|
+|100YWeather.json|Regular JSON File|
+|Citibike.json|Regular JSON File|
+|Retail.json|Regular JSON File|
+|Shipwrecks.json|Regular JSON File|
+|AirRoutes.json|Regular JSON File|
+|Orders.json|Regular JSON File|
+|pokemon-cards.json|JSON Array|
+|Player.csv|CSV File|
+
 ## 1. Navigate to the folder containing all datasets
 
 Right click on the windows button (in the bottom left corner) and click the non-admin 'Command Prompt'. 
@@ -107,3 +124,5 @@ In addition to the options you've already come across, the query above contains:
 On your desktop, double click the Mongo shortcut and you'll be brought straight to the MongoDB shell. This is where you'll write the queries against the various databases and collections you just imported. Happy querying! :smiley:
 
 :warning: `mongoimport` will throw an error from within the Mongo shell, even if your syntax is correct becuase it is a **command line** utitlity and not part of the MongoDB query language. **Therefore, remember to always run the `mongoimport` function from the Command Prompt.**
+
+
