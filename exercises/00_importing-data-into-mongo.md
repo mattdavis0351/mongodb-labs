@@ -1,4 +1,4 @@
-# Importing datasets for MongoDB
+# Importing data into MongoDB
 
 ## 1. Navigate to the folder containing all datasets
 
