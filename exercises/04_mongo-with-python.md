@@ -1,4 +1,4 @@
-## MongoDB using Python
+## MongoDB using PyMongo
 
 In this document, we're going to look at running Mongo queries with Python. The advantage of this kind of querying is that we don't have to leave the Python environment in favor of the Mongo shell and can fire all our queries pythonically. 
 
