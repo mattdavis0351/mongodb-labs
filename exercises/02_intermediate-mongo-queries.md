@@ -1,4 +1,4 @@
-# Query Selectors
+# Intermediate Mongo Queries
 
 There are numerous operators that we can use in our queries to answer more and more complex questions related to our collection. Some of these operators help with learning more about the data stored in the collection whereas others help with understanding the metadata. This document will take you through those operators, which are categorized as follows:
 
