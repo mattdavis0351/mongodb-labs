@@ -160,7 +160,7 @@ Press `Ctrl+C` to stop the server and head back to your **app.py** file to start
 ## API Endpoints
 
 `Endpoints`, also known as `Routes`, are locations on our server that have content which is meant to be accessed.  Access to this content can take place through a web browser such as **Google Chrome** or **Safari**, programatcially by processing `HTTP` requests or using a utility like `POSTMAN` to query the resources.
-We navigate to endpoints on a regular basis as we use the internet.  You're doing so currently as you view this file.  We can view the specific `Endpoint` or `Route` our currently access resource is at by examining the URL in the address bar of our browser.
+We navigate to endpoints on a regular basis as we use the internet.  You're doing so currently as you view this file.  We can view the specific `Endpoint` or `Route` our currently accessed resource is at by examining the URL in the address bar of our browser.
 Consider what happens when you visit [Facebook](https://www.facebook.com), you type `www.facebook.com` into your browser and this usually takes you to the `root` endpoint which is denoted with a `/` character.
 
 What if I want to **create a page** for a Band using Facebook?  Kindly Facebook provides us an `Endpoint` to reach the resources necessary to do so:
