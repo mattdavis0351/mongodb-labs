@@ -294,7 +294,7 @@ In the above example we demonstrated the use of returning a `string` using `str(
 
 :warning: **Before we begin, remove your `/addition` and `/multiplication` routes, as well as the global variables `var1` and `var2` from your `app.py` file.  You can leave the `/` route as is.**
 
-Now that we have an understanding of how routing is working let's create a few functions that will allow us to interact with MongoDB.  We are going to lean on [what you already know](../exercises/04_mongo-with-python.md) about using the PyMongo library, and transition that information into the logic for our endpoints.
+Now that we have an understanding of how routing is working let's create a few functions that will allow us to interact with MongoDB.  We are going to lean on [what you already know](../exercises/04_mongo-with-python.md) about using the `PyMongo` library, and transition that information into the logic for our endpoints.
 
 Keep in mind that these **Helper Functions** may be better suited stored in a more modular fashion in a real-world scenario.  For our examples they are going to live in one file, **app.py**.  
 
@@ -302,9 +302,9 @@ These **Helper Functions** are in no way the only solution to accomplishing this
 
 **Exercise 1:**
 
-To connect to the MongoDB we have to establish a connection.  This will happen anytime we perform a CRUD operation, so I put it into a function to save a few lines of code.  
+To connect to MongoDB we have to establish a connection.  This will happen anytime we perform a CRUD operation, so I put it into a function to save a few lines of code.  
 
-:bulb: You could also build a functiont that ensures the connection closes after each operation, and you should really take the time to do so for your own practice!
+:bulb: You could also build a function that ensures the connection closes after each operation, and you should really take the time to do so for your own practice!
 
 Edit your **app.py** file and add the `create_mongo_session()` helper function:
 
@@ -317,9 +317,9 @@ def create_mongo_session(database, collection):
 ```
 
 **Exercise 2:**
-I have created a few HTML forms, to show how a POST request works.  These forms return data into Flask in a strangeway.  They are called MultiDicts, and are essentially a list of tuples, that get treated like dictionaries... I know right :man_shrugging:
+I have created a few HTML forms, to show how a POST request works.  These forms return data into Flask in a strange way.  They are called MultiDicts, and are essentially a list of tuples, that get treated like dictionaries... I know right :man_shrugging:
 
-What we gain from this is the ability to have a single key with multiple values.  What I mean by that is consider you have two middle names, and your database uses 'middle-name' as a key.  This data type allows for you to correctly input that individuals middle names.
+What we gain from this is the ability to have a single key with multiple values.  What I mean by that is consider you have two middle names, and your database uses 'middle-name' as a key.  This data type allows for you to correctly input that individual's middle names.
 
 But becuase of that, we have to parse it out and create a dictionary that makes sense, or else we can't get the `PyMongo` library to play nice with it for CRUD operations.
 
@@ -372,7 +372,7 @@ app.run(port=35080)
 
 ## MongoDB Functions
 
-Now we are going to setup our functions that will query our MongoDB.  Some of these functions, like `mongo_find(query)` are designed to be flexible with their query parameters.  These functions will do our heavy lifting by running the queries we need and doing any processing on the data before returning it to our route.
+Now we are going to set up our functions that will query our MongoDB.  Some of these functions, like `mongo_find(query)` are designed to be flexible with their query parameters.  These functions will do our heavy lifting by running the queries we need and doing any processing on the data before returning it to our route.
 
 **Exercise 1:**
 Building out our `mongo_find(query)` function.  Inside of **app.py** add this function:
@@ -385,12 +385,12 @@ def mongo_find(query):
         find_result.append(i)
     return str(find_result)
 ```
-:bulb: As you can see, this function calls our `create_mongo_session(database, collection)` helper function.  it takes one `query` parameter and we will handle a blank parameter being passed in when we build the route.
+:bulb: As you can see, this function calls our `create_mongo_session(database, collection)` helper function.  It takes one `query` parameter and we will handle a blank parameter being passed in when we build the route.
 
 **Exercise 2:**
 Since the first exercise focuses on a **Read** operation so in this exercise we will build two **Update** operations.  
 
-Edit **app.py** to add the `mongo_insert_one(doc)`, `mongo_insert_many(doc)`, `mongo_delete()` and `mongo_update()` functions.
+Edit **app.py** to add the `mongo_insert_one(doc)` and `mongo_insert_many(doc)` functions.
 
 **mongo_insert_one(doc)**
 ```python
@@ -409,8 +409,6 @@ def mongo_insert_many(doc):
     db, col = create_mongo_session('somedb', 'somecol')
     col.insert_many(doc)
 ````
-
-Lastly
 
 Okay, that was a lot of functions to add, let's go ahead and view our entire **app.py** file just to make sure everyone is on the right track.
 
@@ -467,17 +465,15 @@ def home_page():
 app.run(port=35080)
 ```
 
-:arrow_right: We have purposely left out functions to update and delete records.  You should challenge yourself to take what you know and build those functions on your own!
-
 **Save app.py but understand that we have not made any changes that will be visible, we have only setup the functions we are going to use in our routes.  The next section implements our changes.**
 
-You should also consider experimenting with SQL libraries and implementing helper functions like this for your API. You may not be using MongoDB, and the API concepts will remain the same regardless of your database, however how you interact with that database will differ significantly.
+You should also consider experimenting with SQL libraries and implementing helper functions like this for your API. You may not be using MongoDB, but the API concepts will remain the same regardless of your database. However, how you interact with that database will differ significantly.
 
 Notice how things like authentication have been left out?!
 
 That's one major reason setting this up in production is a very bad thing!!  You should consider security at every step along the way.  
 
-There are also no request limits, consider what happens if someone makes 90million requests at once... this is called a denial of service attack, and can render your resources inaccessible.  If you are running on a cloud providers platform, you will most likely be paying per request for things like this... and that bill gets expensive fast, so consider everything!
+There are also no request limits, consider what happens if someone makes 90 million requests at once... this is called a denial of service attack, and can render your resources inaccessible.  If you are running on a cloud provider's platform, you will most likely be paying per request for things like this... and that bill gets expensive fast, so consider everything!
 
 ## Tying It All Together
 
@@ -488,7 +484,7 @@ A web service in Flask is defined by routes.  Routes is just a fancy word for UR
 
 We already have our first route in our **app.py** file, its our `/` route.  Let's add another!
 
-The /api/v1 route uses flask to render another template from a static HTML file.  This is where our API starts however.  Somtimes you will see public API's have a `/api/v1/docs` route that contains instructions for using their API, this route is where I plan to put the instructions for our API.
+The /api/v1 route uses flask to render another template from a static HTML file.  This is where our API starts however.  Somtimes you will see public APIs have a `/api/v1/docs` route that contains instructions for using their API. This route is where I plan to put the instructions for our API.
 
 It's basic, so there is nothing to really see here when it comes to what happens at this route, but we will add it anyway just to get familiar with this practice.
 
@@ -502,7 +498,7 @@ def api_root():
 
 :warning: These routes depened on the `HTML` template files mentioned at the beginning of this document.  If these routes don't load, make sure you have those files in your project directory!
 
-**Exercise 2:***
+**Exercise 2:**
 Let's start using some of our helper functions at these routes.  The first route will be the simplest one to implement logic for. 
 
 We want a route that will return to us, ALL of the data in a given collection from a specific database.
@@ -511,7 +507,7 @@ If you think back to our helper function (hint... go look :wink:) you will know 
 
 In our case, the result of `mongo_find()` gets returned in the HTTP response when a HTTP GET request is made at this route.
 
-No `GET` request, no function.  However this route is only accepting of a `GET` request.  If we tried to use a `POST`, `UPDATE`, or `DELETE` we would see and error saying the method is not allowed.
+No `GET` request, no function.  However this route is only accepting of a `GET` request.  If we tried to use a `POST`, `UPDATE`, or `DELETE` we would see an error saying the method is not allowed.
 
 :arrow_right:  Refer to the MongoDB documentation if you don't understand why `{}` was the filter arguement for our `mongo_find` function.
 
@@ -532,7 +528,7 @@ If the request is a `POST`, it calls some of our helper functions to extract the
 
 `POST` is necessary here becuase the action our form makes, located in the `query.html` file, is a `POST` when the submit button is pressed.
 
-Add this route to your **app.py** file
+Add this route to your **app.py** file.
 
 ```python
 @app.route('/api/v1/mongo/find', methods=['GET', 'POST'])
@@ -551,7 +547,7 @@ Before we add the next route to our **app.py** file we need to change our `impor
 from flask import Flask, request, jsonify, render_template, url_for, redirect
 ```
 
-:arrow_right:  The two changes are `url_for` and `redirect`
+:arrow_right:  The two changes are `url_for` and `redirect`.
 
 Now we will add a route to insert data, located in an `HTML` form into our MongoDB.  This route has a little extra :fire: to it as it also redirects you back to the main page after you submit the form.
 
@@ -667,5 +663,4 @@ Navigate to `http://localhost:35080/` to get started, the link on this page will
 
 :bulb: Go ahead an build the rest of the **CRUD** operations into this api to see what you can come up with!
 
-
-
+:arrow_right: We have purposely left out functions to update and delete records.  You should challenge yourself to take what you know and build those functions on your own!
