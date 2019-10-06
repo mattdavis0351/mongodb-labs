@@ -661,6 +661,18 @@ Navigate to `http://localhost:35080/` to get started, the link on this page will
 - Navigate with your browser or use `POSTMAN` to send a `GET` request to `http://localhost:35080/api/v1/mongo/find/all`.  You should see ALL of the documents in your target collection returned to you.  (At this stage you should have 1 document, revisit your `insert` route and add a few more for full effect)
 - Use your web browser to navigate to the `http://localhost:35080/api/v1/mongo/find` route and enter a query parameter for one of the documents in your database (note, as it stands right now we can only query for `First Names`)
 
-:bulb: Go ahead an build the rest of the **CRUD** operations into this api to see what you can come up with!
 
-:arrow_right: We have purposely left out functions to update and delete records.  You should challenge yourself to take what you know and build those functions on your own!
+## Group Activities
+During this time the class should split into :five: groups to complete each section.
+
+**Activity 1: :alarm_clock: 15 minutes** 
+
+Challenge yourself to go ahead and build the rest of the **CRUD** operations into this api to see what you can come up with!
+
+**Activity 2: :alarm_clock: 15 minutes**
+
+Right now, our query parameter only uses `First Names`. Expand that functionality by querying on other fields present in the collection. After all, in today's :earth_asia:, hardly anyone remembers first names anyway!
+
+**Presentation: :alarm_clock: 25 minutes**
+Present your results from **Group Activities** and answer any questions your classmates may have.
+
