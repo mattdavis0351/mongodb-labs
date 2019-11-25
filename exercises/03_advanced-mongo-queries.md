@@ -23,7 +23,7 @@ The `$group` operator groups the documents by an identifier specified by `_id` f
 
 **Exercise 1** :computer: 
 
-Group the players by batting hand. And for each batting hand, count the number of players. 
+Suppose there is a dearth in willow production this year and the bat manufacturer can only supply bats for either right-handed or left-handed batsmen but not both. Write a query for the bat manufacturer that groups the players by batting hand so that you can inform him which kind of bat he should put into production to gain maximum revenue. 
 
 **query:**
 ```javascript
@@ -53,7 +53,7 @@ db.cricket_players.aggregate([
 
 **Exercise 2** :computer: 
 
-Count the number of players per country. 
+There is talk of adding cricket to the Olympic sports. But before a conclusive decision can be made, the Olympic board needs to find out if its even feasible to do so. Write a query for the Olympic board informing them of the number of players in each country.
 
 **query:**
 ```javascript
@@ -69,7 +69,7 @@ db.cricket_players.aggregate([
 :bulb: Only 35 players have ever captained Inida's national cricket team!
 
 **Exercise 3** :computer: 
-Count the number of players of each country that bat with a given hand.
+The Olympic board is well aware of the willow crisis. Therefore, to be on the safe side, they have one more request for you. They would like to know the number of players of each country that bat with a given hand.
 
 **query:**
 ```javascript
@@ -82,6 +82,8 @@ db.cricket_players.aggregate([
     }
 ])
 ```
+:warning: Wait a minute! Before you send these over to the bat manufacturer or the Olympic board, let's work on making these query results more readable. We'll do this in the following exercises.
+
 ---
 
 ### The "$match" operator
@@ -92,7 +94,7 @@ The `$match` operator matches input documents to a given criteria and passes tho
 
 **Exercise 4** :computer: 
 
-Count the number of players by non-null batting hand.
+We have observed `NULL` values in our previous results and even though it's important for us as database engineers to know what data is missing, our end users like the bat manufacturer or the Olympic board can't really do much with the `NULL` values. Let's improve our queries then to exclude the `NULL` values when grouping the players by batting hand.
 
 **query:**
 ```javascript
@@ -120,9 +122,7 @@ By using **$match** we can say "go to the box room and find all the blue ones, b
 
 **Exercise 5** :computer: 
 
-Our data isn't the cleanest, you'll learn more about data cleansing in future classes, but for now, some of our players have the value of `NULL` where the country they play for should be.  Let's look at a query that will filter out those who meet this condition.
-
-Count number of players by non null country.
+Similar to Exercise 4, let's count the number of players by non null country.
 
 **query:**
 ```javascript
@@ -142,7 +142,7 @@ db.cricket_players.aggregate([
 
 **Exercise 6** :computer: 
 
-Count number of players of each country that bat with a given hand. Remove null values of `Batting_Hand` and sort the output in alphabetical order. 
+One last thing we can do to ease readability for the Olympic board is to sort the players in alphabetical order in addition to all the changes we implemented previously. Put all your knowledge together and count number of players of each country that bat with a given hand. Remove null values of `Batting_Hand` and sort the output in alphabetical order. 
 
 **query:**
 ```javascript
@@ -161,6 +161,8 @@ db.cricket_players.aggregate([
     }
 ])
 ```
+
+:tada: Great! I'm sure looking at this easy-to-read result, you might stand a chance of getting a free ticket or two to the next Olympics! :wink: 
 
 :arrow_right: The `$sort` operator takes a **key: value** pair as input:
 - **key** being the field by which to sort (in our case `_id`) 
