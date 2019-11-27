@@ -271,7 +271,7 @@ Adding another parameter using the `,` operator **AND**s the filters and returns
 
 **Exercise 6** :computer:
 
-There are various `subtype` of Pokemon cards. You can take a look by running the `distinct()` query against this field. One of those `subtype` is "GX" which is a super strong Pokemon card that comes with :muscle: attacks. Let's find out how many "GX" cards have an `hp` of 250.
+There are various `subtype` of Pokemon cards. You can take a look by running the `distinct()` query against this field. One of those `subtype` is 'GX' which is a super strong Pokemon card that comes with :muscle: attacks. Let's find out how many 'GX' cards have an `hp` of 250.
 
 **query:**
 
@@ -395,236 +395,204 @@ Much nicer on our :eyes: !
 
 ### Filtering embedded documents
 
+Driving down the hierarchy in documents can be done using the dot notation.
+
 **Exercise 9** :computer:
 
-Driving down the hierarchy in documents can be done using the dot notation. In the query below, we access the `rating` field (which is nested inside the `imdb` field) using `imdb.rating` as the **key**.
+Since we're on a quest to build a solid Pokemon card deck, the most logical next question to ask would be "How much energy do these :muscle: attacks take?" There are various energy cards in the Pokemon world - :fire:, water, and lightning to name a few. We're interested in `attacks` that `cost` 'Colorless' energy since we can use any other energy types in place of 'Colorless' in such attacks. 
 
 **query:**
 
 ```javascript
-db.movieDetails.find({"imdb.rating":9.5}).pretty()
+db.cards.find({"hp":"250", "subtype": "GX", "attacks.cost": "Colorless"}).pretty()
 ```
-:arrow_right: It is important to note that if the **value** of the **key** is an array, you will need to use the aggregate pipeline instead of a simple `find()` method. We'll cover the aggregate pipeline in another document. 
 
 ---
 
 ### Filtering array values
 
-**Exercise 10** :computer:
-
 When it comes to matching on array values, we can match in 3 ways:
 * the entire array
 
-The following query matches documents where the `genres` array contains **exactly** 'Documentary' followed by 'Family', in that order. Note that arrays that contain 'Documentary', 'Family' and any other genre like 'Drama' or 'Comedy' are not returned because they are not an **exact** match of the filter criteria. 
 
 
+**Exercise 10** :computer:
+
+What's better than one 'Colorless' `attacks.cost`? 
+Two 'Colorless' `attacks.cost`!!! :stuck_out_tongue: 
+
+What I mean to say is, let's build on our previous query and find out if there are any cards that require only 2 'Colorless' energy to launch their attack!
 
  **query:**
 
 ```javascript
-db.movieDetails.find({"genres":["Documentary", "Family"]}).pretty()
+db.cards.find({"hp":"250", "subtype": "GX", "attacks.cost": ["Colorless", "Colorless"]}).pretty()
 ```
 
-**result:**
+**result:** (Only a part of the output is shown.)
 ```javascript
 {
-	"_id" : ObjectId("5d7e92671ddae9be2e7259f4"),
-	"title" : "Coming Off the DL",
-	"year" : 2010,
-	"rated" : null,
-	"runtime" : 26,
-	"countries" : [
-		"USA"
+	"_id" : ObjectId("5c20177bf2e24cfe719626e2"),
+	"id" : "smp-SM39",
+	"name" : "Primarina-GX",
+	"nationalPokedexNumber" : 730,
+	"imageUrl" : "https://images.pokemontcg.io/smp/SM39.png",
+	"imageUrlHiRes" : "https://images.pokemontcg.io/smp/SM39_hires.png",
+	"types" : [
+		"Water"
 	],
-	"genres" : [
-		"Documentary",
-		"Family"
+	"supertype" : "Pokemon",
+	"subtype" : "GX",
+	"evolvesFrom" : "Brionne",
+	"hp" : "250",
+	"retreatCost" : [
+		"Colorless",
+		"Colorless"
 	],
-	"director" : "Trish Campbell, Dan Hunt",
-	"writers" : [
-		"Justin Ferguson",
-		"Megan Hansler"
+	"convertedRetreatCost" : 2,
+	"number" : "SM39",
+	"artist" : "5ban Graphics",
+	"rarity" : "",
+	"series" : "Sun & Moon",
+	"set" : "SM Black Star Promos",
+	"setCode" : "smp",
+	"text" : [
+		"When your Pokemon-GX is Knocked Out, your opponent takes 2 Prize cards."
 	],
-	"actors" : [
-		"Nick Gaynor",
-		"Frank Kineavy"
+	"attacks" : [
+		{
+			"cost" : [
+				"Colorless",
+				"Colorless"
+			],
+			"name" : "Bubble Beat",
+			"text" : "This attack does 20 more damage times the amount of Water Energy attached to your Pokemon.",
+			"damage" : "10+",
+			"convertedEnergyCost" : 2
+		},
+		{
+			"cost" : [
+				"Water",
+				"Water",
+				"Water",
+				"Colorless"
+			],
+			"name" : "Roaring Seas",
+			"text" : "Discard an Energy from your opponent's Active Pokemon.",
+			"damage" : "120",
+			"convertedEnergyCost" : 4
+		},
+		{
+			"cost" : [
+				"Colorless",
+				"Colorless"
+			],
+			"name" : "Grand Echo-GX",
+			"text" : "Heal all damage from all of your Pokemon. (You can't use more than 1 GX attack in a game.)",
+			"damage" : "",
+			"convertedEnergyCost" : 2
+		}
 	],
-	"plot" : "When athletes are 'on the DL,' or disabled list, they cannot play due to injury. In the film 'Coming Off The DL,' the meaning of 'disabled list' changes, but the feeling of exclusion ...",
-	"poster" : null,
-	"imdb" : {
-		"id" : "tt1723754",
-		"rating" : 9,
-		"votes" : 11
-	},
-	"awards" : {
-		"wins" : 0,
-		"nominations" : 0,
-		"text" : ""
-	},
-	"type" : "movie"
-}
-{
-	"_id" : ObjectId("5d7e92671ddae9be2e725d78"),
-	"title" : "Small Town, USA: Andrews, NC",
-	"year" : 2014,
-	"rated" : null,
-	"runtime" : 51,
-	"countries" : [
-		"USA"
-	],
-	"genres" : [
-		"Documentary",
-		"Family"
-	],
-	"director" : "Johnathon Proctor",
-	"writers" : [
-		"Johnathon Proctor"
-	],
-	"actors" : [
-		"Ann Lukens"
-	],
-	"plot" : null,
-	"poster" : null,
-	"imdb" : {
-		"id" : "tt3588916",
-		"rating" : null,
-		"votes" : null
-	},
-	"awards" : {
-		"wins" : 0,
-		"nominations" : 0,
-		"text" : ""
-	},
-	"type" : "movie"
+	"weaknesses" : [
+		{
+			"type" : "Grass",
+			"value" : "×2"
+		}
+	]
 }
 ```
-:arrow_right: Documents with the array of `genres:["Family","Documentary"]` will also not be returned for the same reason.
+:arrow_right: The query above matches documents where **atleast one** of the array elements contains **exactly** 'Colorless' followed by 'Colorless', in that order. Note that arrays that contain 'Colorless', 'Colorless' and any other `attacks.cost` like 'Fire' or 'Water' are not returned because they are not an **exact** match of the filter criteria. 
 
 **Exercise 11** :computer: 
 * any element in the array
 
-A more common search criteria is filtering out a single element in the array, irrespective of its array position. Note that 'Musical' is matched irrespective of its position in the `genres` array. 
+A more common search criteria is filtering out a single element in the array, irrespective of its array position. Note that 'Colorless' is matched irrespective of its position in the `attacks.cost` array. This is done by removing the `[]` brackets from the filter.
 
 **query:**
 ```javascript
-db.movieDetails.find({"genres":"Musical"}).pretty()
+db.cards.find({"hp":"250", "subtype": "GX", "attacks.cost": "Colorless"}).pretty()
 ```
 **result:** (Only a part of the output has been shown.)
 ```javascript
 {
-	"_id" : ObjectId("5d7e92671ddae9be2e72570a"),
-	"title" : "Rok Sako To Rok Lo",
-	"year" : 2004,
-	"rated" : null,
-	"runtime" : null,
-	"countries" : [
-		"India"
+	"_id" : ObjectId("5c20177bf2e24cfe71962622"),
+	"id" : "sm4-34",
+	"name" : "Alolan Golem-GX",
+	"nationalPokedexNumber" : 76,
+	"imageUrl" : "https://images.pokemontcg.io/sm4/34.png",
+	"imageUrlHiRes" : "https://images.pokemontcg.io/sm4/34_hires.png",
+	"types" : [
+		"Lightning"
 	],
-	"genres" : [
-		"Adventure",
-		"Musical",
-		"Romance"
+	"supertype" : "Pokemon",
+	"subtype" : "GX",
+	"evolvesFrom" : "Alolan Graveler",
+	"hp" : "250",
+	"retreatCost" : [
+		"Colorless",
+		"Colorless",
+		"Colorless",
+		"Colorless"
 	],
-	"director" : "Arindam Chowdhuri",
-	"writers" : [
-		"Arindam Chowdhuri"
+	"convertedRetreatCost" : 4,
+	"number" : "34",
+	"artist" : "5ban Graphics",
+	"rarity" : "Rare Holo GX",
+	"series" : "Sun & Moon",
+	"set" : "Crimson Invasion",
+	"setCode" : "sm4",
+	"text" : [
+		"When your Pokemon-GX is Knocked Out, your opponent takes 2 Prize cards."
 	],
-	"actors" : [
-		"Sunny Deol",
-		"Yash Pandit",
-		"Manjari Phadnis",
-		"Carran Kapur"
+	"attacks" : [
+		{
+			"cost" : [
+				"Lightning",
+				"Colorless",
+				"Colorless"
+			],
+			"name" : "Hammer In",
+			"text" : "",
+			"damage" : "80",
+			"convertedEnergyCost" : 3
+		},
+		{
+			"cost" : [
+				"Lightning",
+				"Lightning",
+				"Colorless",
+				"Colorless"
+			],
+			"name" : "Super Electromagnetic Tackle",
+			"text" : "This Pokemon does 50 damage to itself.",
+			"damage" : "200",
+			"convertedEnergyCost" : 4
+		},
+		{
+			"cost" : [
+				"Lightning",
+				"Lightning",
+				"Colorless",
+				"Colorless"
+			],
+			"name" : "Heavy Rock-GX",
+			"text" : "Your opponent can't play any cards from their hand during their next turn. (You can't use more than 1 GX attack in a game.)",
+			"damage" : "100",
+			"convertedEnergyCost" : 4
+		}
 	],
-	"plot" : "In a small scenic town in India there are two schools, Valley High School, which basically caters to the affluent, and Bharti High School for the middle-class. The annual sports fest has ...",
-	"poster" : null,
-	"imdb" : {
-		"id" : "tt0423087",
-		"rating" : 6.7,
-		"votes" : 1784
-	},
-	"awards" : {
-		"wins" : 0,
-		"nominations" : 1,
-		"text" : "1 nomination."
-	},
-	"type" : "movie"
-}
-{
-	"_id" : ObjectId("5d7e92671ddae9be2e725740"),
-	"title" : "Har Dil Jo Pyar Karega...",
-	"year" : 2000,
-	"rated" : null,
-	"runtime" : 173,
-	"countries" : [
-		"India"
+	"resistances" : [
+		{
+			"type" : "Metal",
+			"value" : "-20"
+		}
 	],
-	"genres" : [
-		"Comedy",
-		"Drama",
-		"Musical"
-	],
-	"director" : "Raj Kanwar",
-	"writers" : [
-		"Rumi Jaffery",
-		"Rumi Jaffery"
-	],
-	"actors" : [
-		"Salman Khan",
-		"Preity Zinta",
-		"Rani Mukerji",
-		"Shah Rukh Khan"
-	],
-	"plot" : "Raj is a struggling singer with big dreams who is still waiting for his big break. One night he witnesses an accident where a car spins out of control and lands on the tracks of an ...",
-	"poster" : "http://ia.media-imdb.com/images/M/MV5BMjY1NzQ4NzM2OF5BMl5BanBnXkFtZTcwMzY1ODgzMQ@@._V1_SX300.jpg",
-	"imdb" : {
-		"id" : "tt0250415",
-		"rating" : 5.1,
-		"votes" : 2835
-	},
-	"awards" : {
-		"wins" : 1,
-		"nominations" : 3,
-		"text" : "1 win & 3 nominations."
-	},
-	"type" : "movie"
-}
-{
-	"_id" : ObjectId("5d7e92671ddae9be2e725cb1"),
-	"title" : "Ez Már Nemcsak Játék",
-	"year" : 1982,
-	"rated" : null,
-	"runtime" : null,
-	"countries" : [
-		"Hungary"
-	],
-	"genres" : [
-		"Musical"
-	],
-	"director" : "Judit Szakall",
-	"writers" : [
-		"Andras Lantos aka. Andy Lant",
-		"Andy Lant",
-		"Judit Szakall"
-	],
-	"actors" : [
-		"Zsuzsa Gaspar",
-		"Andy Lant",
-		"János Szani",
-		"Marianna Tál"
-	],
-	"plot" : "A high school musical about kids getting accepted to High School in Hungary and their funny, or at times quite rough circumstances of growing up.",
-	"poster" : null,
-	"imdb" : {
-		"id" : "tt1956486",
-		"rating" : 7.8,
-		"votes" : 6
-	},
-	"awards" : {
-		"wins" : 0,
-		"nominations" : 0,
-		"text" : ""
-	},
-	"type" : "movie"
+	"weaknesses" : [
+		{
+			"type" : "Fighting",
+			"value" : "×2"
+		}
+	]
 }
 ```
 :arrow_right: This method only works if the **value** is not an object.  We will cover how to access objects in an array in a later exercise.
@@ -633,97 +601,92 @@ db.movieDetails.find({"genres":"Musical"}).pretty()
 
 * array position (for eg: arrays whose first element match a particular criteria)
 
-Sometimes array positions matter as in the case of the `actors` array where names are listed in the order of contribution. In order to achieve this, use dot notation to specify an array index.
+The `types` field is an array that indicates the type of the Pokemon. Some Pokemon are dual typed meaning they exhibit properties of 2 types of Pokemon. For example, I know that there are Pokemon which are both 'Fighting' as well as 'Metal' type. 
+
+But what if I want to know what other types are paired with 'Metal' type? In the query below, `types.1: "Metal"` indicates that we're looking for Pokemon cards where the 2nd element of the `types` array is 'Metal.'
+
+:bulb: Don't forget that arrays use 0-indexing here!
 
 **query:**
 ```javascript
-db.movieDetails.find({"actors.0":"Shah Rukh Khan"}).pretty()
+db.cards.find({"types.1": "Metal"}).pretty()
 ```
 
 **result:** (Only a part of the output has been shown.)
 ```javascript
 {
-	"_id" : ObjectId("5d7e92671ddae9be2e725a15"),
-	"title" : "Main Hoon Na",
-	"year" : 2004,
-	"rated" : null,
-	"runtime" : 179,
-	"countries" : [
-		"India"
+	"_id" : ObjectId("5c20177bf2e24cfe719619e6"),
+	"id" : "ex11-13",
+	"name" : "Rayquaza δ",
+	"nationalPokedexNumber" : 384,
+	"imageUrl" : "https://images.pokemontcg.io/ex11/13.png",
+	"imageUrlHiRes" : "https://images.pokemontcg.io/ex11/13_hires.png",
+	"types" : [
+		"Lightning",
+		"Metal"
 	],
-	"genres" : [
-		"Action",
-		"Comedy",
-		"Romance"
-	],
-	"director" : "Farah Khan",
-	"writers" : [
-		"Farah Khan",
-		"Abbas Tyrewala",
-		"Farah Khan",
-		"Rajesh Saathi",
-		"Abbas Tyrewala"
-	],
-	"actors" : [
-		"Shah Rukh Khan",
-		"Sushmita Sen",
-		"Sunil Shetty",
-		"Zayed Khan"
-	],
-	"plot" : "An army major goes undercover as a college student. His mission is both professional and personal: to protect his general's daughter from a radical militant, and to find his estranged half-brother.",
-	"poster" : "http://ia.media-imdb.com/images/M/MV5BMjE1Mjg3NTY3NV5BMl5BanBnXkFtZTcwNjQyNDE0MQ@@._V1_SX300.jpg",
-	"imdb" : {
-		"id" : "tt0347473",
-		"rating" : 6.9,
-		"votes" : 20277
+	"supertype" : "Pokemon",
+	"subtype" : "Basic",
+	"ability" : {
+		"name" : "Delta Guard",
+		"text" : "As long as Rayquaza has any Holon Energy cards attached to it, ignore the effect of Rayquaza's Lightning Storm attack.",
+		"type" : "Poké-Body"
 	},
-	"awards" : {
-		"wins" : 8,
-		"nominations" : 34,
-		"text" : "8 wins & 34 nominations."
-	},
-	"type" : "movie"
-}
-{
-	"_id" : ObjectId("5d7e92671ddae9be2e725a8d"),
-	"title" : "Dilwale Dulhania Le Jayenge",
-	"year" : 1995,
-	"rated" : "NOT RATED",
-	"runtime" : 181,
-	"countries" : [
-		"India"
+	"hp" : "90",
+	"retreatCost" : [
+		"Colorless",
+		"Colorless",
+		"Colorless"
 	],
-	"genres" : [
-		"Comedy",
-		"Drama",
-		"Musical"
+	"convertedRetreatCost" : 3,
+	"number" : "13",
+	"artist" : "Ryo Ueda",
+	"rarity" : "Rare Holo",
+	"series" : "EX",
+	"set" : "Delta Species",
+	"setCode" : "ex11",
+	"text" : [
+		"This Pokemon is both Lightning Metal type."
 	],
-	"director" : "Aditya Chopra",
-	"writers" : [
-		"Aditya Chopra",
-		"Aditya Chopra",
-		"Aditya Chopra",
-		"Javed Siddiqui"
+	"attacks" : [
+		{
+			"cost" : [
+				"Lightning"
+			],
+			"name" : "Power Blow",
+			"text" : "Does 10 damage times the amount of Energy attached to Rayquaza.",
+			"damage" : "10×",
+			"convertedEnergyCost" : 1
+		},
+		{
+			"cost" : [
+				"Lightning",
+				"Metal",
+				"Colorless",
+				"Colorless"
+			],
+			"name" : "Lightning Storm",
+			"text" : "Put 7 damage counters on Rayquaza.",
+			"damage" : "",
+			"convertedEnergyCost" : 4
+		}
 	],
-	"actors" : [
-		"Shah Rukh Khan",
-		"Kajol",
-		"Amrish Puri",
-		"Farida Jalal"
+	"resistances" : [
+		{
+			"type" : "Water",
+			"value" : "-30"
+		},
+		{
+			"type" : "Fighting",
+			"value" : "-30"
+		}
 	],
-	"plot" : "A young man and woman - both of Indian descent but born and raised in Britain - fall in love during a trip to Switzerland. However, the girl's traditional father takes her back to India to fulfill a betrothal promise.",
-	"poster" : "http://ia.media-imdb.com/images/M/MV5BNDk3MTU5MDA3OF5BMl5BanBnXkFtZTgwODM3MzY2MzE@._V1_SX300.jpg",
-	"imdb" : {
-		"id" : "tt0112870",
-		"rating" : 8.3,
-		"votes" : 37795
-	},
-	"awards" : {
-		"wins" : 12,
-		"nominations" : 0,
-		"text" : "12 wins."
-	},
-	"type" : "movie"
+	"weaknesses" : [
+		{
+			"type" : "Colorless",
+			"value" : "×2"
+		}
+	]
 }
 ```
 
