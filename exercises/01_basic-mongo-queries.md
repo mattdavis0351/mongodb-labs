@@ -695,26 +695,27 @@ db.cards.find({"types.1": "Metal"}).pretty()
 ### Projections
 By default, MongoDB returns all fields for all matching documents as seen in all the results above. Projections reduce network overhead and processing requirements by limiting the fields that are returned in the results documents. Projections are passed as the second argument to the `find()` method. 
 
+ Use `<field name>: 1` to include that field in the results document and/or use `<field name>: 0` to exclude that field. Note that the **values** `1` and `0` stand for **inclusion** and **exclusion** in the resulting document respectively.
+
 **Exercise 13** :computer: 
 
- Use `<field name>: 1` to include that field in the results document and/or use `<field name>: 0` to exclude that field. Note that the **values** `1` and `0` stand for **inclusion** and **exclusion** in the resulting document respectively. In the query below, we are asking only for the `title` field to be shown in the output. 
+We've written all these cool queries to try and pin point some amazing Pokemon cards so let's reduce the clutter and start by familiarizing ourselves with their names!
 
 **query:**
 ```javascript
-db.movieDetails.find({"genres":["Action", "Adventure"]},{"title":1})
+db.cards.find(
+    {"hp":"250", "subtype": "GX", "attacks.cost": "Colorless"}, 
+    {"name":1})
 ```
 
-**result:**
+**result:** (Only a part of the output has been shown.)
 ```javascript
-{ "_id" : ObjectId("5d7e92671ddae9be2e725510"), "title" : "MacGyver: Trail to Doomsday" }
-{ "_id" : ObjectId("5d7e92671ddae9be2e72557e"), "title" : "Raiders of the Lost Ark" }
-{ "_id" : ObjectId("5d7e92671ddae9be2e7255df"), "title" : "Spider-Man" }
-{ "_id" : ObjectId("5d7e92671ddae9be2e7255e5"), "title" : "Spider-Man 3" }
-{ "_id" : ObjectId("5d7e92671ddae9be2e7257ff"), "title" : "Bruce Li the Invincible Chinatown Connection" }
-{ "_id" : ObjectId("5d7e92671ddae9be2e725c77"), "title" : "Bo ming chan dao duo ming qiang" }
+{ "_id" : ObjectId("5c20177bf2e24cfe71961322"), "name" : "Metagross-GX" }
+{ "_id" : ObjectId("5c20177bf2e24cfe71961577"), "name" : "Primarina-GX" }
+{ "_id" : ObjectId("5c20177bf2e24cfe71961681"), "name" : "Solgaleo-GX" }
 ```
 
-In the output above, the query returns the `title` field as expected but the `_id` field gets returned by default too.
+In the output above, the query returns the `name` field as expected but the `_id` field gets returned by default too.
 
 **Exercise 14** :computer: 
 
@@ -722,20 +723,16 @@ In order to exclude the `_id` field, we have to explicitly exclude it in our que
 
 **query:**
 ```javascript
-db.movieDetails.find({"genres":["Action", "Adventure"]},
-    {"title": 1, "_id": 0})
+db.cards.find(
+    {"hp":"250", "subtype": "GX", "attacks.cost": "Colorless"}, 
+    {"name":1, "_id": 0})
 ```
-**result:**
+**result:** (Only a part of the output has been shown.)
 ```javascript
-{ "title" : "MacGyver: Trail to Doomsday" }
-{ "title" : "Raiders of the Lost Ark" }
-{ "title" : "Spider-Man" }
-{ "title" : "Spider-Man 3" }
-{ "title" : "Bruce Li the Invincible Chinatown Connection" }
-{ "title" : "Bo ming chan dao duo ming qiang" }
+{ "name" : "Metagross-GX" }
+{ "name" : "Primarina-GX" }
+{ "name" : "Solgaleo-GX" }
 ```
-:book:[Read More](https://docs.mongodb.com/manual/reference/method/db.collection.find/index.html) about the `find()` method.
-
 ---
 
 ## Update Operations
