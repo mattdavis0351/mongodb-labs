@@ -2,8 +2,7 @@
 
 This document deals with basic **Create**, **Read**, **Update** and **Delete** operations using the mongo shell. 
 
-
-[Read more](https://docs.mongodb.com/manual/crud/) :book: about the CRUD operations here. 
+:book: [Read more](https://docs.mongodb.com/manual/crud/) about **CRUD operations**. 
 
 ## Create Operations
 
@@ -221,72 +220,87 @@ You've got some more interesting employees! Spend **10 minutes** :alarm_clock: c
 
 ## Read Operations
 
-:warning: Before we dive into our **Read** operations, make sure you can access the `movieDetails` collection. Use commands like `show dbs`, `use <db name>`, `show collections` to correctly naviagte to the intended collection. 
+:warning: Before we dive into our **Read** operations, make sure you can access the `pokemon-cards` collection. Use commands like `show dbs`, `use <db name>`, `show collections` to correctly naviagte to the intended collection. 
+
+For any of you who haven't played the Pokemon card game, I highly recommend it! Also, once you learn enough MongoDB querying, you can analyze this database to find out which cards are the most powerful to include in your deck! :tada: 
 
 ### Counting records
 **Exercise 4** :computer:
 
-A simple `count()` operation in order to count the number of documents in the collection.
+Let's start with a simple `count()` operation in order to count the number of documents in the collection. 
+
+:book: [Read More](https://docs.mongodb.com/manual/reference/command/count/index.html) about the **`count()`** method.
 
 **query:**
 ```javascript
-db.movieDetails.count()
+db.cards.count()
 ```
 
-:arrow_right: `count()` returns the total of all documents, which means duplicate documents will be counted.  
-To get a count of unique values replace `count()` with `distinct()`.
+:arrow_right: `count()` returns the total of all documents, which means duplicate documents will be counted.
+
+To get a count of unique values in a given field, replace `count()` with `distinct()` and enter a field value of your choice as the first argument.
+
+**query:**
+```javascript
+db.cards.distinct("hp")
+```
+
+:arrow_right: `hp` stands for Hit Points and is the amount of damage a Pokemon can take. 
 
 ---
 
 ### Filtering on a single field
 
-**Exercise 5** :computer: 
-
 In order to filter data, add a parameter as the first argument to the `count()` method. Parameters exist as objects, and are therefore `key:value` pairs. 
 
-In the query below, `rated` is the **key** and `PG-13` is the **value**.
+In the query below, `hp` is the **key** and `250` is the **value**.
+
+**Exercise 5** :computer: 
+
+We definitely want to have high `hp` Pokemon in our winning deck so let's find how many of those we have. 
 
 **query:**
 ```javascript
-db.movieDetails.count({"rated": "PG-13"})
+db.cards.count({"hp": "250"})
 ```
 ---
 
 ### Filtering on multiple fields
 
+Adding another parameter using the `,` operator **AND**s the filters and returns the matching results.
+
 **Exercise 6** :computer:
 
-Adding another parameter using the `,` operator **AND**s the filters and returns the matching results.
+There are various `subtype` of Pokemon cards. You can take a look by running the `distinct()` query against this field. One of those `subtype` is "GX" which is a super strong Pokemon card that comes with :muscle: attacks. Let's find out how many "GX" cards have an `hp` of 250.
 
 **query:**
 
 ```javascript
-db.movieDetails.count({"rated": "PG-13", "year":1993})
+db.cards.count({"hp":"250", "subtype":"GX"})
 ```
-As you can see the documents returned are only those where BOTH parameters match.
-
-:book: [Read More](https://docs.mongodb.com/manual/reference/command/count/index.html) about the `count()` method
+:arrow_right: As you can see the documents returned are only those where BOTH parameters match.
 
 ---
 
 ### Using the "find()" method
 
+To display an entire document, use the `find()` method. When using `find()` with no additional parameters, every document in the database will be returned. Usually you will want to add parameters to `find()` in order to filter your results. Remember that `,` is an **AND** operator.
+
+:book: [Read More](https://docs.mongodb.com/manual/reference/method/db.collection.find/index.html) about the **`find()`** method.
+
+
 **Exercise 7** :computer:
 
-To display an entire document, use the `find()` method.
-
-:arrow_right: When using `find()` with no additional parameters, every document in the database will be returned. 
-
-Usually you will want to add parameters to `find()` like you see in the example below.  Remember that `,` is an **AND** operator.
+Let's take a look at what the powerful cards we came across in the previous exercise actually looks like!
 
 **query:**
 ```javascript
-db.movieDetails.find({"rated": "PG-13", "year":1993})
+db.cards.find({"hp":"250", "subtype":"GX"})
 ```
 
 **result:** (Only a part of the output has been shown.)
 ```javascript
-{ "_id" : ObjectId("5d7e92671ddae9be2e725550"), "title" : "Son in Law", "year" : 1993, "rated" : "PG-13", "runtime" : 95, "countries" : [ "USA" ], "genres" : [ "Comedy", "Drama", "Romance" ], "director" : "Steve Rash", "writers" : [ "Patrick J. Clifton", "Susan McMartin", "Peter M. Lenkov", "Fax Bahr", "Adam Small", "Shawn Schepps" ], "actors" : [ "Pauly Shore", "Carla Gugino", "Lane Smith", "Cindy Pickett" ], "plot" : "Having gotten a taste of college life, a drastically changed farm girl returns home for Thanksgiving break with her best friend, a flamboyant party animal who is clearly a fish out of water in a small farm town.", "poster" : "http://ia.media-imdb.com/images/M/MV5BMTUxNDkyODMwN15BMl5BanBnXkFtZTYwODA3NjU5._V1_SX300.jpg", "imdb" : { "id" : "tt0108186", "rating" : 5.6, "votes" : 12557 }, "awards" : { "wins" : 0, "nominations" : 1, "text" : "1 nomination." }, "type" : "movie" }
+{ "_id" : ObjectId("5c20177bf2e24cfe71961322"), "id" : "sm2-157", "name" : "Metagross-GX", "nationalPokedexNumber" : 376, "imageUrl" : "https://images.pokemontcg.io/sm2/157.png", "imageUrlHiRes" : "https://images.pokemontcg.io/sm2/157_hires.png", "types" : [ "Metal" ], "supertype" : "Pokemon", "subtype" : "GX", "evolvesFrom" : "Metang", "ability" : { "name" : "Geotech System", "text" : "Once during your turn (before your attack), you may attach a Psychic or Metal Energy card from your discard pile to your Active Pokemon.", "type" : "Ability" }, "hp" : "250", "retreatCost" : [ "Colorless", "Colorless", "Colorless" ], "convertedRetreatCost" : 3, "number" : "157", "artist" : "5ban Graphics", "rarity" : "Rare Secret", "series" : "Sun & Moon", "set" : "Guardians Rising", "setCode" : "sm2", "text" : [ "When your Pokemon-GX is Knocked Out, your opponent takes 2 Prize cards." ], "attacks" : [ { "cost" : [ "Metal", "Metal", "Colorless" ], "name" : "Giga Hammer", "text" : "This Pokemon can't use Giga Hammer during your next turn.", "damage" : "150", "convertedEnergyCost" : 3 }, { "cost" : [ "Colorless" ], "name" : "Algorithm-GX", "text" : "Search your deck for up to 5 cards and put them into your hand. Then, shuffle your deck. (You can't use more than 1 GX attack in a game.)", "damage" : "", "convertedEnergyCost" : 1 } ], "resistances" : [ { "type" : "Psychic", "value" : "-20" } ], "weaknesses" : [ { "type" : "Fire", "value" : "×2" } ] }
 ```
 
 As you can see, the output contains the entire document in a single line. This makes it hard to discern the layout of the document. We'll cover easy document parsing in the next exercise.
@@ -299,56 +313,83 @@ Let's chain the `pretty()` method to the `find()` method for a prettier print of
 
 **query:**
 ```javascript
-db.movieDetails.find({"rated": "PG-13", "year":1993}).pretty()
+db.cards.find({"hp":"250", "subtype":"GX"}).pretty()
 ```
 
 **result:** (Only a part of the output has been shown.)
 ```javascript
 {
-	"_id" : ObjectId("5d7e92671ddae9be2e725550"),
-	"title" : "Son in Law",
-	"year" : 1993,
-	"rated" : "PG-13",
-	"runtime" : 95,
-	"countries" : [
-		"USA"
+	"_id" : ObjectId("5c20177bf2e24cfe71961322"),
+	"id" : "sm2-157",
+	"name" : "Metagross-GX",
+	"nationalPokedexNumber" : 376,
+	"imageUrl" : "https://images.pokemontcg.io/sm2/157.png",
+	"imageUrlHiRes" : "https://images.pokemontcg.io/sm2/157_hires.png",
+	"types" : [
+		"Metal"
 	],
-	"genres" : [
-		"Comedy",
-		"Drama",
-		"Romance"
-	],
-	"director" : "Steve Rash",
-	"writers" : [
-		"Patrick J. Clifton",
-		"Susan McMartin",
-		"Peter M. Lenkov",
-		"Fax Bahr",
-		"Adam Small",
-		"Shawn Schepps"
-	],
-	"actors" : [
-		"Pauly Shore",
-		"Carla Gugino",
-		"Lane Smith",
-		"Cindy Pickett"
-	],
-	"plot" : "Having gotten a taste of college life, a drastically changed farm girl returns home for Thanksgiving break with her best friend, a flamboyant party animal who is clearly a fish out of water in a small farm town.",
-	"poster" : "http://ia.media-imdb.com/images/M/MV5BMTUxNDkyODMwN15BMl5BanBnXkFtZTYwODA3NjU5._V1_SX300.jpg",
-	"imdb" : {
-		"id" : "tt0108186",
-		"rating" : 5.6,
-		"votes" : 12557
+	"supertype" : "Pokemon",
+	"subtype" : "GX",
+	"evolvesFrom" : "Metang",
+	"ability" : {
+		"name" : "Geotech System",
+		"text" : "Once during your turn (before your attack), you may attach a Psychic or Metal Energy card from your discard pile to your Active Pokemon.",
+		"type" : "Ability"
 	},
-	"awards" : {
-		"wins" : 0,
-		"nominations" : 1,
-		"text" : "1 nomination."
-	},
-	"type" : "movie"
+	"hp" : "250",
+	"retreatCost" : [
+		"Colorless",
+		"Colorless",
+		"Colorless"
+	],
+	"convertedRetreatCost" : 3,
+	"number" : "157",
+	"artist" : "5ban Graphics",
+	"rarity" : "Rare Secret",
+	"series" : "Sun & Moon",
+	"set" : "Guardians Rising",
+	"setCode" : "sm2",
+	"text" : [
+		"When your Pokemon-GX is Knocked Out, your opponent takes 2 Prize cards."
+	],
+	"attacks" : [
+		{
+			"cost" : [
+				"Metal",
+				"Metal",
+				"Colorless"
+			],
+			"name" : "Giga Hammer",
+			"text" : "This Pokemon can't use Giga Hammer during your next turn.",
+			"damage" : "150",
+			"convertedEnergyCost" : 3
+		},
+		{
+			"cost" : [
+				"Colorless"
+			],
+			"name" : "Algorithm-GX",
+			"text" : "Search your deck for up to 5 cards and put them into your hand. Then, shuffle your deck. (You can't use more than 1 GX attack in a game.)",
+			"damage" : "",
+			"convertedEnergyCost" : 1
+		}
+	],
+	"resistances" : [
+		{
+			"type" : "Psychic",
+			"value" : "-20"
+		}
+	],
+	"weaknesses" : [
+		{
+			"type" : "Fire",
+			"value" : "×2"
+		}
+	]
 }
+
 ```
-Much nicer on our :eyes:!
+Much nicer on our :eyes: !
 
 ---
 
