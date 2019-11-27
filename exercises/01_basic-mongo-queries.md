@@ -278,7 +278,7 @@ There are various `subtype` of Pokemon cards. You can take a look by running the
 ```javascript
 db.cards.count({"hp":"250", "subtype":"GX"})
 ```
-:arrow_right: As you can see the documents returned are only those where BOTH parameters match.
+:arrow_right: The documents returned are only those where BOTH parameters match.
 
 ---
 
@@ -291,7 +291,7 @@ To display an entire document, use the `find()` method. When using `find()` with
 
 **Exercise 7** :computer:
 
-Let's take a look at what the powerful cards we came across in the previous exercise actually looks like!
+Let's take a look at what the powerful cards we came across in the previous exercise actually look like!
 
 **query:**
 ```javascript
@@ -303,7 +303,7 @@ db.cards.find({"hp":"250", "subtype":"GX"})
 { "_id" : ObjectId("5c20177bf2e24cfe71961322"), "id" : "sm2-157", "name" : "Metagross-GX", "nationalPokedexNumber" : 376, "imageUrl" : "https://images.pokemontcg.io/sm2/157.png", "imageUrlHiRes" : "https://images.pokemontcg.io/sm2/157_hires.png", "types" : [ "Metal" ], "supertype" : "Pokemon", "subtype" : "GX", "evolvesFrom" : "Metang", "ability" : { "name" : "Geotech System", "text" : "Once during your turn (before your attack), you may attach a Psychic or Metal Energy card from your discard pile to your Active Pokemon.", "type" : "Ability" }, "hp" : "250", "retreatCost" : [ "Colorless", "Colorless", "Colorless" ], "convertedRetreatCost" : 3, "number" : "157", "artist" : "5ban Graphics", "rarity" : "Rare Secret", "series" : "Sun & Moon", "set" : "Guardians Rising", "setCode" : "sm2", "text" : [ "When your Pokemon-GX is Knocked Out, your opponent takes 2 Prize cards." ], "attacks" : [ { "cost" : [ "Metal", "Metal", "Colorless" ], "name" : "Giga Hammer", "text" : "This Pokemon can't use Giga Hammer during your next turn.", "damage" : "150", "convertedEnergyCost" : 3 }, { "cost" : [ "Colorless" ], "name" : "Algorithm-GX", "text" : "Search your deck for up to 5 cards and put them into your hand. Then, shuffle your deck. (You can't use more than 1 GX attack in a game.)", "damage" : "", "convertedEnergyCost" : 1 } ], "resistances" : [ { "type" : "Psychic", "value" : "-20" } ], "weaknesses" : [ { "type" : "Fire", "value" : "×2" } ] }
 ```
 
-The output contains the entire document in a single line. This makes it hard to discern the layout of the document. We'll cover easy document parsing in the next exercise.
+As you can see, the output contains the entire document in a single line. This makes it hard to discern the layout of the document. We'll cover easy document parsing in the next exercise.
 
 **Exercise 8** :computer: 
 
