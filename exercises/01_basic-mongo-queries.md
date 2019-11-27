@@ -744,7 +744,7 @@ The MongoDB query language supports 3 update operations:
 
 **Exercise 15** :computer: 
 
-Let's turn our attention towards movies made in 🇮🇳 ! I bet all of you have either heard of or watched "Taare Zameen Par" but unfortunately this collection hasn't got the name right! 
+Switch over to the `movieDetails` collections and et's turn our attention towards movies made in India ! I bet some of you have either heard of or watched the :movie_camera: "Taare Zameen Par" but unfortunately this collection hasn't got the name right! 
 
 * Spend **5 minutes** :alarm_clock: to find out what the movie `title` is in our collection! Feel free to use the internet to look up identifying information like the release year or the actor/director/writer names to use in your query filter. 
 
