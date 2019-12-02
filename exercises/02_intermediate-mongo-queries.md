@@ -43,7 +43,7 @@ In the following query, we look at movies which had a runtime greater than 180 m
 
 **query:**
 
-```javascript=
+```javascript
 db.movieDetails.find({"runtime": {"$gt":180}}, 
     {"title": 1, "_id": 0})
 ```
@@ -53,7 +53,7 @@ db.movieDetails.find({"runtime": {"$gt":180}},
 What about movies which ran for greater than or equal to 2 hours but less than 3 hours?
 
 **query:**
-```javascript=
+```javascript
 db.movieDetails.find({"runtime": {"$gte":120, "$lt": 180}}, 
     {"title": 1, "_id": 0})
 ```
@@ -66,7 +66,7 @@ db.movieDetails.find({"runtime": {"$gte":120, "$lt": 180}},
 List the movies which had a runtime longer than 3 hours and had a rating higher than 8
 
 **query:**
-```javascript=
+```javascript
 db.movieDetails.find({"runtime": {"$gt": 180},
     "imdb.rating": {"$gt":8}}, 
     {"title": 1, "_id": 0})
