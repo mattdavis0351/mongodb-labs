@@ -9,6 +9,8 @@ There are numerous operators that we can use in our queries to answer more and m
 
 [Read more](https://docs.mongodb.com/manual/reference/operator/query/) :book: about query selectors. 
 
+:arrow_right: Switch over to the `movieDetails` collection for the following exercises. 
+
 ## Comparison Operators
 
 
