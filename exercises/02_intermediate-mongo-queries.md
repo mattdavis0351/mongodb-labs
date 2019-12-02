@@ -7,7 +7,7 @@ There are numerous operators that we can use in our queries to answer more and m
 * Element Operators
 * Array Operators
 
-[Read more](https://docs.mongodb.com/manual/reference/operator/query/) :book: about query selectors. 
+:book: [Read more](https://docs.mongodb.com/manual/reference/operator/query/) about **query selectors**. 
 
 :arrow_right: Switch over to the `movieDetails` collection for the following exercises. 
 
@@ -63,7 +63,7 @@ db.movieDetails.find({"runtime": {"$gte":120, "$lt": 180}},
 
 **Exercise 3** :computer: 
 
-List the movies which had a runtime longer than 3 hours and had a rating higher than 8
+List the movies which had a runtime longer than 3 hours and had a `imdb.rating` higher than 8.
 
 **query:**
 ```javascript
@@ -79,11 +79,11 @@ db.movieDetails.find({"runtime": {"$gt": 180},
 
 **Exercise 3** :computer: 
 
-Filter out records where the `rating` field does not contain the value of 'UNRATED'.   
+Filter out records where the `rating` field does not contain the value of 'NOT RATED'.   
 
 **query:**
 ```javascript
-db.movieDetails.find({"rated": {"$ne": "UNRATED"}}, 
+db.movieDetails.find({"rated": {"$ne": "NOT RATED"}}, 
     {"_id":0, "title":1, "rated":1})
 ```
 **result:** (Only a part of the output has been shown.)
@@ -95,7 +95,7 @@ db.movieDetails.find({"rated": {"$ne": "UNRATED"}},
 { "title" : "Turks in Space", "rated" : null }
 ```
 
-Look at the last document in the output above. The `rated` field has a `null` value. This is because `$ne` **only** excludes the documents where the `rated` field has a value of `UNRATED`. All other values, (be it `APPROVED`, `R`, `PG-13`, `PG`, `null` etc) find their way into the result. In the same vein, `$ne` also outputs documents which do **not** have a `rated` field at all. 
+Look at the last document in the output above. The `rated` field has a `null` value. This is because `$ne` **only** excludes the documents where the `rated` field has a value of `NOT RATED`. All other values, (be it `APPROVED`, `R`, `PG-13`, `PG`, `null` etc) find their way into the result. In the same vein, `$ne` also outputs documents which do **not** have a `rated` field at all. 
 
 In a future exercise, we'll see how to find documents which do not have a given field. 
 
@@ -103,7 +103,7 @@ In a future exercise, we'll see how to find documents which do not have a given 
 
 ### The "$in" query operator
 
-The `$in` operator allows us to specify 1 or more values, any 1 of which if matched, causes a resulting document to be returned. Note that the value of `$in` should always be an array. 
+The `$in` operator allows us to specify 1 or more values in an array. If any 1 of those filter conditions is matched, a resulting document is returned. 
 
 **Exercise 4** :computer: 
 
