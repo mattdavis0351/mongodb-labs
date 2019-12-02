@@ -270,25 +270,22 @@ One of the more powerful operators for arrays is `$elemMatch`. It matches array 
 
 Copy and run the following code in your mongo shell: (Revenue is in million dollars.)
 ```javascript
-martian = db.movieDetails.findOne({"title": "The Martian"})
-delete martian._id
-martian.boxOffice = [
-    {"country": "North America", "revenue": 228.4},
-    {"country": "Others", "revenue": 401.7}
-]
-db.movieDetails.insertOne(martian)
+var1 = db.movieDetails.findOne({"title": "Shutter Island"})
+delete var1._id
+var1.boxOffice = [{"country": "America", "revenue": 127.3},{"country": "Overseas", "revenue": 166.5}]
+db.movieDetails.insertOne(var1)
 ```
 
 What did we just do?!
 Simply put:
-* we created a variable called `martian`
-* added a reference to the document titled `"The Martian"` within that variable
+* we created a variable called `var1`
+* added a reference to the document titled `"Shutter Island"` within that variable
 * went on to add another field called `boxOffice` to that variable which turns out to be an **array of objects**
 * inserted that variable in our collection as a document of its own
 
 Now when you run:
 ```javascript
-db.movieDetails.find({"title": "The Martian"}).pretty()
+db.movieDetails.find({"title": "Shutter Island"}).pretty()
 ```
 you'll see that 2 documents are returned. One's the original document and the other is the one we just created with an additional `boxOffice` field. 
 
@@ -296,25 +293,25 @@ The point of this was to add an **array of objects** field to our collection. No
 
 **Exercise 2** :computer: 
 
-Take 5 minutes :alarm_clock: to find the movies where the `boxOffice` revenue in "North America" was greater than 
-* $200m 
-* $400m
+Take 5 minutes :alarm_clock: to find the movies where the `boxOffice` revenue in "America" was greater than 
+* $100m 
+* $150m
 
 How many of you ran similar queries?
 ```javascript
-db.movieDetails.find({"boxOffice.country": "North America", 
-    "boxOffice.revenue": {"$gt": 200}}).pretty()
+db.movieDetails.find({"boxOffice.country": "America", 
+    "boxOffice.revenue": {"$gt": 100}}).pretty()
     
-db.movieDetails.find({"boxOffice.country": "North America", 
-    "boxOffice.revenue": {"$gt": 400}}).pretty()
+db.movieDetails.find({"boxOffice.country": "America", 
+    "boxOffice.revenue": {"$gt": 150}}).pretty()
 ```
 
-:arrow_right: Note that the first query runs correctly by returning the document with "The Martian" `boxOffice`, but the second query returns the same result even though it is :x:!!! 
-There is no movie in our collection which has a revenue greater than $400m in North America. 
+:arrow_right: Note that the first query runs correctly by returning the document with "Shutter Island" `boxOffice`, but the second query returns the same result even though it is :x:!!! 
+There is no movie in our collection with revenue greater than $150m in America. 
 
 This happened because the query ran the following checks: 
-* is `boxOffice.country` equal to "North America" :white_check_mark:
-* is `boxOffice.revenue` greater than $400m :white_check_mark:
+* is `boxOffice.country` equal to "America" :white_check_mark:
+* is `boxOffice.revenue` greater than $150m :white_check_mark:
 
 Both checks were satisfied at **different array positions**!!!
 
@@ -324,16 +321,16 @@ Try the following 2 queries:
 ```javascript
 db.movieDetails.find({"boxOffice": 
     {"$elemMatch": 
-        {"country": "North America", "revenue": 
-            {"$gt": 200}}}}).pretty()
+        {"country": "America", "revenue": 
+            {"$gt": 100}}}}).pretty()
             
 db.movieDetails.find({"boxOffice": 
     {"$elemMatch": 
-        {"country": "North America", "revenue": 
-            {"$gt": 400}}}}).pretty()
+        {"country": "America", "revenue": 
+            {"$gt": 150}}}}).pretty()
 ```
 
-See the difference?!
+See the difference?! :eyes:
 
 ---
 
