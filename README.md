@@ -2,11 +2,11 @@
 
 
 # MongoDB
-MongoDB is the fifth most popular database engine at the time of writing according to [db-engines](https://db-engines.com/en/ranking_trend).  As you can guess, this means the probability that you encounter Mongo is quite high.
+MongoDB is the fifth most popular database engine at the time of writing according to [db-engines](https://db-engines.com/en/ranking_trend).  As you can guess, this means the probability that you encounter MongoDB is quite high.
 
 **Why is this?**
 
-MongoDB’s provides a simple model based on documents that is easy for developers to learn and use.  It does so while continuing to meet the most complex requirements at scale.  Mongo officially supports drivers in over 10 languages, and has a flourishing community that has built dozens more.
+MongoDB provides a simple model based on documents that is easy for developers to learn and use.  It does so while continuing to meet the most complex requirements at scale.  Mongo officially supports drivers in over 10 languages, and has a flourishing community that has built dozens more.
 
 Becuase of that, we've put together a series of documents designed to get you primed to use MongoDB using the Mongo Query Language as well as Python.
 
@@ -19,14 +19,14 @@ Becuase of that, we've put together a series of documents designed to get you pr
 
 ### Mongo Query Language
 
-- [CRUD](exercises/01_basic-mongo-queries.md):  Basic **Create**, **Read**, **Update** and **Delete** operations with a focus on getting you accostomed to a new style of writing queries.
-- [Intermediate Querying](exercises/02_intermediate-mongo-queries.md):  Exercises that will walk you though more advanced use cases for **Read** operations.
+- [CRUD](exercises/01_basic-mongo-queries.md):  Basic **Create**, **Read**, **Update** and **Delete** operations with a focus on getting you accustomed to a new style of writing queries.
+- [Intermediate Querying](exercises/02_intermediate-mongo-queries.md):  Exercises that will walk you through more advanced use cases for **Read** operations.
 - [Advanced Querying](exercises/03_advanced-mongo-queries.md):  This collection of exercises builds on the previous two and really readies you to leverage the aggregate pipeline when making MongoDB queries.  Learn to harness the flexibility and power behind this unique database.
 
 ### Using MongoDB and Python3 With PyMongo
 
 - [PyMongo](exercises/04_mongo-with-python.md):  Learn the recommended way to work with MongoDB and Python.  These exercises show you how to convert the Mongo Query Language into easy to use Python code.
-- [Web Services With Mongo and Python](exercises/05_python-mongo-webservice.md) teaches us how an API may integrate with MongoDB.
+- [Web Services With Mongo and Python](exercises/05_python-mongo-webservice.md) teaches you how an API may integrate with MongoDB.
 
 ---
 
