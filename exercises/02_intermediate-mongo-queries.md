@@ -39,23 +39,23 @@ Let's take a quick :eyes: at what is available for **Query Selector** operations
 
 **Exercise 1** :computer: 
 
-In the following query, we look at movies which had a runtime greater than 180 minutes (3 hours.)
+In the following query, we look at movies which were made in the year 1970 or before.
 
 **query:**
 
 ```javascript
-db.movieDetails.find({"runtime": {"$gt":180}}, 
-    {"title": 1, "_id": 0})
+db.movieDetails.find({year: {"$lte": 1970}}, 
+    {title: 1, _id: 0})
 ```
 
 **Exercise 2** :computer: 
 
-What about movies which ran for greater than or equal to 2 hours but less than 3 hours?
+What about movies which were made in or before 1970 but after 1965?
 
 **query:**
 ```javascript
-db.movieDetails.find({"runtime": {"$gte":120, "$lt": 180}}, 
-    {"title": 1, "_id": 0})
+db.movieDetails.find({year: {"$lte": 1970, "$gt": 1965}}, 
+    {title: 1, _id: 0})
 ```
 ---
 
@@ -107,12 +107,12 @@ The `$in` operator allows us to specify 1 or more values in an array. If any 1 o
 
 **Exercise 4** :computer: 
 
-Find movies which were either rated `R`, `PG` or `PG-13`.
+Find movies which were tagged as one of the following genres: `Sport`, `Talk-Show` or `News`. Pretty unusual genres for a movie!
 
 **query:**
 ```javascript
-db.movieDetails.find({"rated": {"$in": ["R", "PG", "PG-13"]}}, 
-    {"_id":0, "title":1, "rated":1})
+db.movieDetails.find({"genres": {"$in": ["Sport", "Talk-Show", "News"]}}, 
+    {"_id":0, "title":1, "genres":1})
 ```
 
 **Exercise 5** :computer: 
@@ -122,6 +122,16 @@ Use the `$nin` query operator (**not in** operator) to match **none** of the val
 ---
 
 ## Logical Operators
+
+These operators perform one of the following logical operations on the fields:
+
+Name | Description
+--- | ---
+$and | Joins query clauses with a logical AND returns all documents that match the conditions of both clauses.
+$or | Joins query clauses with a logical OR returns all documents that match the conditions of either clause.
+$not | Inverts the effect of a query expression and returns documents that do not match the query expression.
+$nor | Joins query clauses with a logical NOR returns all documents that fail to match both clauses.
+
 
 ### The "$or" operator
 This operator **OR**s the filters stated in a query and returns documents where atleast 1 of the filters is true. 
@@ -183,22 +193,27 @@ Take 5 minutes :alarm_clock: to run the above query using the `$and` operator. K
 Since MongoDB is a non relational database:
 * there can be fields which are **present in one document** but **absent in another document**. 
 
-* there can also be fields in a collection that have **different value types** across documents. 
+* there can also be fields in a collection that have **different data types** across documents. 
 
-In the following exercises, we'll learn about operators that help us explore these aspects of our collection. 
+Following are the operators that help us explore these aspects of our collection:
+
+Name | Description
+--- | ---
+$exists | Matches documents that have the specified field.
+$type | Selects documents if a field is of the specified type.
 
 **Exercise 1** :computer: 
 
-Using the `$exists` operator, count the number of documents which contain the field `tomato.consensus`.
+Using the `$exists` operator, count the number of documents which contain the field `poster`.
 
 **query:**
 ```javascript
-db.movieDetails.count({"tomato.consensus": {"$exists": true}})
+db.movieDetails.count({"poster": {"$exists": true}})
 ```
 
 **Exercise 2** :computer: 
 
-* Using the `$exists` operator, count the number of documents which do **not** contain the field `tomato.consensus`. 
+* Using the `$exists` operator, count the number of documents which do **not** contain the field `poster`. 
 
     *Hint: use `{"$exists": false}`*
 
@@ -211,14 +226,14 @@ db.movieDetails.count({"tomato.consensus": {"$exists": true}})
     **query:**
 
     ```javascript
-    db.movieDetails.count({"tomato.consensus": null})
+    db.movieDetails.count({"poster": null})
     ```
     
-:arrow_right: Note that the query above returns not only documents where the `tomato.consensus` field is `null` but also those documents where the `tomato.consensus` field is absent. Check it out for yourself!
+:arrow_right: Note that the query above returns not only documents where the `poster` field is `null` but also those documents where the `poster` field is absent. Check it out for yourself!
 
 **Exercise 3** :computer: 
 
-Explore the various datatypes present per field using the `$type` operator. Refer to the [documentation](https://docs.mongodb.com/manual/reference/operator/query/type/#op._S_type) for additional reference. 
+Explore the various datatypes present per field using the `$type` operator. Refer to the [documentation](https://docs.mongodb.com/manual/reference/operator/query/type/#op._S_type) for additional reference. You already know by now that `null` is considered a datatype in MongoDB.
 
 To help you get started, here's an example:
 
@@ -237,29 +252,28 @@ db.movieDetails.find({"plot": {"$type": "null"}}).pretty()
 
 In the following exercises, we'll look at operators for array fields. 
 
+Name | Description
+--- | ---
+$all | Matches arrays that contain all elements specified in the query.
+$elemMatch | Selects documents if element in the array field matches all the specified $elemMatch conditions.
+$size | Selects documents if the array field is a specified size.
+
 ### The "$all" query operator
 
-`$all` matches array fields against an array of elements. A document is returned when all the elements listed in the query are found in the document's array field. 
+`$all` matches fields against an array of elements. A document is returned when all the elements listed in the query are found in the document's array field. 
 
 :arrow_right: Elements in the document's array are **not** required to be in the exact order as specified in the query. 
 
 **Exercise 1** :computer: 
 
-Use the `$all` operator to find movies which were both a Drama and a Comedy. 
+Use the `$all` operator to find movies which were both:  History and War `genres`. 
 
 **query:**
 ```javascript
-db.movieDetails.find({"genres": {"$all": ['Drama', 'Comedy']}}, 
+db.movieDetails.find({"genres": {"$all": ['History', 'War']}}, 
     {"_id": 0, "title": 1, "genres": 1})
 ```
 
-**result:** (Only a part of the output has been shown.)
-```javascript
-{ "title" : "The Cowboy and the Lady", "genres" : [ "Comedy", "Drama", "Romance" ] }
-{ "title" : "Quick Gun Murugun: Misadventures of an Indian Cowboy", "genres" : [ "Action", "Comedy", "Drama" ] }
-{ "title" : "Wild Tales", "genres" : [ "Comedy", "Drama", "Thriller" ] }
-{ "title" : "Down by Law", "genres" : [ "Comedy", "Crime", "Drama" ] }
-```
 :arrow_right: As you can see, returned documents contain both Drama and Comedy `genres` in addition to others (like Romance, Thriller etc) which were not specified in our query. Also note that the order of elements did not matter. 
 
 ---
@@ -340,16 +354,16 @@ As the name suggests, this operator deals with the length of an array.
 
 **Exercise 3** :computer: 
 
-* Which movies were filmed in just one country?
+* What were the maximum number of countries a movie was shot in? And which were those movies?
 
     **query:**
 
     ```javascript
-    db.movieDetails.find({"countries": {"$size": 1}}, 
+    db.movieDetails.find({"countries": {"$size": 6}}, 
         {"_id": 0, "title": 1, "countries": 1})
-    ```
-    
-* Similar to the previous query, take **5 minutes** ⏰ to find the maximum number of countries that a movie(s) was shot in. It'll take a little trial and error but code away! 
+    ``` 
+
+Would you have liked to be a part of that movie and traveled to all these countries? :earth_africa:
 
 ---
 ## Group Activities
