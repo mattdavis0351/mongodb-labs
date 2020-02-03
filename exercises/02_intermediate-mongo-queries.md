@@ -274,7 +274,7 @@ db.movieDetails.find({"genres": {"$all": ['History', 'War']}},
     {"_id": 0, "title": 1, "genres": 1})
 ```
 
-:arrow_right: As you can see, returned documents contain both Drama and Comedy `genres` in addition to others (like Romance, Thriller etc) which were not specified in our query. Also note that the order of elements did not matter. 
+:arrow_right: As you can see, returned documents contain both History and War `genres` in addition to others (like Documentary, Short etc) which were not specified in our query. Also note that the order of elements did not matter. 
 
 ---
 
@@ -363,7 +363,7 @@ As the name suggests, this operator deals with the length of an array.
         {"_id": 0, "title": 1, "countries": 1})
     ``` 
 
-Would you have liked to be a part of that movie and traveled to all these countries? :earth_africa:
+Would you have liked to be a part of that movie and traveled to all those countries? :earth_africa:
 
 ---
 ## Group Activities
