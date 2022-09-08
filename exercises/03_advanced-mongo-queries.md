@@ -43,7 +43,7 @@ db.cricket_players.aggregate([
 { "_id" : "Right_Hand", "playerCountByBattingHand" : 345 }
 ```
 
-:arrow_right: A word on the aggregate pipleine syntax: By now, we're all familiar with the JSON format of **key: value** pairs. 
+:arrow_right: A word on the aggregate pipeline syntax: By now, we're all familiar with the JSON format of **key: value** pairs. 
 - Whenever a field is accessed as the **key**, it is written as it is. We've seen numerous examples of this starting from our very first filtering query `db.movieDetails.count({"rated": "PG-13"})`. 
     - Here the field `rated` is used as a key and is simply written as `rated`.
     
